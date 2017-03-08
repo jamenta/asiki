@@ -126,7 +126,7 @@ class ResultsController < ApplicationController
 	    @comment = @post.comment
 	    @pointTotal = 0
 	    @results.each do |r|
-	      @pointTotal += (r.points.to_i * r.points.to_i)
+	      @pointTotal += (r.points.to_i * r.reps.to_i)
 	    end
 	   end   
 	end
