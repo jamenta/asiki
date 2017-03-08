@@ -1,0 +1,21 @@
+$('body').prepend("<%= j render "message" %>");
+$('a#close').click(function(){
+  $('div#outer-message').remove();
+});
+
+$("textarea#message-value").keyup(function(){
+  var messageLength = $(this).val().length;
+  var charsRemain = 180 - messageLength;
+  if (charsRemain < 0){
+    $('#send-message-btn').attr("disabled", true);
+    $("div#message-alerts p#count").replaceWith("<p id='count' class='warning'>" + charsRemain + "</p>");
+  }
+  else if (charsRemain < 10){
+    $('#send-message-btn').attr("disabled", false);
+    $("div#message-alerts p#count").replaceWith("<p id='count' class='warning'>" + charsRemain + "</p>");
+  }
+  else {
+    $('#send-message-btn').attr("disabled", false);
+    $("div#message-alerts p#count").replaceWith("<p id='count'>" + charsRemain + "</p>");
+  }
+});

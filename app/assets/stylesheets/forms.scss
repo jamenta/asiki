@@ -1,0 +1,244 @@
+.new-user{
+  position: relative;
+  margin: auto;
+  left: -39px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  width: 396px;
+}
+
+.login{
+ margin: auto;
+ width: 300px;
+ margin-top: 30px;
+ margin-bottom: 10px;
+}
+
+.login form input, .new-user form input, .new-user form select {
+  margin: 6px;
+  width: 300px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.new-user form .signup-container {
+  text-align: right;
+  height: 66px;
+}
+
+.new-user form label {
+ display: inline-block;
+ width: 78px;
+ text-align: right;
+}
+
+div#gravatar, div#gravatar-display {
+width: 520px;
+margin: auto;
+margin-top: 10px;
+}
+
+div#gravatar{
+display:none;
+}
+
+input#gravatar-input {
+ height: 50px;
+ width: 300px;
+ margin-right: 105px;
+ font-size: 16px;
+ }
+
+.new-user form i {
+cursor: pointer;
+}
+
+.all-form-input, #new-contest form .new-contest-name input, input#gravatar-input {
+border: none;
+border-bottom: 4px solid #4C534F;
+}
+
+.all-form-input:focus, #new-contest form .new-contest-name input:focus, input#gravatar-input:focus {
+  border-bottom: 4px solid #95DCE3;
+  box-shadow: 0 0;
+  transition: border-bottom 0.4s;
+  outline: none;
+}
+
+.submit-results{
+  display: none;
+  margin: auto;
+  }
+
+.submit-results h2{
+  margin-top: 10px;
+  padding-top: 5px;
+  margin-bottom: 15px;
+  margin-right: 15%;
+  margin-left: 15%;
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+.submit-results form {
+ margin-bottom: 5px;
+ display: inline-block;
+}
+
+.submit-results form div.submit-input {
+  padding: 0px 10px 10px 10px;
+  display: inline-block;
+}
+
+.submit-results form input {
+  width: 75px;
+  height: 30px;
+  border: none;
+  border-bottom: 3px solid #4C534F;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.submit-results form textarea {
+  border: 3px solid #4C534F;
+  transition: border 0.3s;
+  outline: none;
+  margin-bottom: 0;
+}
+.submit-results form textarea:focus {
+  border: 3px solid #95DCE3;
+}
+
+.submit-results form input:focus{
+  border-bottom: 3px solid #95DCE3;
+  transition: border-bottom 0.3s;
+  outline: none;
+}
+
+.submit-results p {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.login-btn, .submit-btn {
+  background-color: rgb(117, 161, 164);
+  color: white;
+  border: 2px solid white;
+  line-height: 50%;
+  transition: all .4s;
+  cursor: pointer;
+}
+
+.login-btn:hover, .submit-btn:hover{
+  color: #FFFFFF;
+  background-color: rgb(19, 58, 117);
+}
+
+.submit-btn {
+height: 50px;
+width: 350px;
+font-size: 16px;
+margin: 20px 0 30px 0;
+}
+
+
+form input#submit-results-btn, div#new-contest form input#create-contest-btn, div#edit-contest form input#edit-contest-btn  {
+  text-decoration: none;
+  font-size: 20px;
+  background-color:#2dbb5e;
+  color: white;
+  border: 2px solid white;
+  width: 300px;
+  height: 55px;
+  transition: all .4s;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form input#submit-results-btn {
+ margin-bottom: 10px;
+}
+
+form input#submit-results-btn:hover, div#new-contest form input#create-contest-btn:hover, div#edit-contest form input#edit-contest-btn:hover{
+  background-color: #4de66c;
+}
+
+form div#form-comment-section {
+  display: none;
+ }
+
+p#form-comment-link {
+  cursor:pointer;
+  font-size: 14px;
+  margin: auto;
+  margin-bottom: 10px;
+  transition: color .4s;
+  width: 130px;
+  }
+
+p#form-comment-link:hover {
+ color: #95DCE3;
+}
+
+div#comment-warnings p {
+ font-size: 12px;
+ color: #FEBABA;
+}
+
+div#new-contest-warnings p {
+ font-size: 16px;
+ color: #FEBABA;
+}
+
+div#new-contest, div#edit-contest {
+  width: 600px;
+  height: 300px;
+  margin: auto;
+}
+
+div#new-contest form .new-contest-name, div#new-contest form .new-contest-date, div#edit-contest form .edit-contest-name, div#edit-contest form .edit-contest-date  {
+  text-align: right;
+}
+
+div#new-contest form .new-contest-name input, div#edit-contest form .edit-contest-name input {
+  width: 350px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 120px;
+  font-size: 20px;
+}
+
+div#new-contest form input, div#edit-contest form input{
+ margin: 10px 0 10px 0;
+}
+
+div#new-contest form .new-contest-date input, div#edit-contest form .edit-contest-date input {
+  width:160px;
+  height: 50px;
+  margin-right: 215px;
+  margin-left: 5px;
+  font-size: 18px;
+}
+
+div.emoji-option {
+  display:inline-block;
+  margin: 12px;
+}
+
+div.emoji-option-row {
+ display: block;
+}
+
+div#gravatar-checkbox {
+display: inline-block;
+padding-right: 10px;
+}
+
+div#gravatar-checkbox input {
+width: 18px;
+height: 18px;
+vertical-align:bottom;
+color: blue;
+}

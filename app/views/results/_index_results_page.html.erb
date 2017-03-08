@@ -1,0 +1,63 @@
+<% if @workouts == nil %>
+  <h2 style="padding: 15px 0 15px 0;">No results to show...yet.</h2>
+  <% if @user %>
+	<% if current_user.id.to_i == @user.id.to_i %>
+	  <p>Check out this week's <a href="/workouts">workouts</a> and log your results!</p>
+	<% end %>
+  <% end %>
+<% elsif @workouts.length == 0 %>
+  <h2 style="padding: 15px 0 15px 0;">No results to show...yet.</h2>
+  <% if @user %>
+	<% if current_user.id.to_i == @user.id.to_i %>
+	  <p>Check out this week's <a href="/workouts">workouts</a> and log your results!</p>
+	<% end %>
+  <% end %>
+<% else %>
+	<div class="qf-header">
+	  <h1>Results for <%= @user.first_name + " " + @user.last_name[0,1].upcase + "." %></h1>
+	</div>
+	<%= render partial: "results_table" %>
+	<% if @total_pages > 1 %>
+		<div id="pagination">
+		  <% if @start != 0 %>
+			<a id="previous" title="Previous page" href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>&current=<%= @current_bool %>&start=<%= @prev_val %>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+		  <% end %>
+		  <% if [0,1,2].include? @active_page %>
+			<% @total_pages.times do |page| %>
+			  <% if page > 4 %>
+				<% break %>
+			  <% else %>
+				<% if @active_page == page %>
+				  <a class="active" href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>&current=<%= @current_bool %>&start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+				<% else %>
+				  <a href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>&current=<%= @current_bool %>&start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+				<% end %>
+			  <% end %>
+			<% end %>
+		  <% elsif [@total_pages - 1, @total_pages - 2, @total_pages - 3].include? @active_page %>
+			<% @total_pages.times do |page| %>
+			  <% if [@total_pages - 1, @total_pages - 2, @total_pages - 3, @total_pages - 4, @total_pages - 5].include? page %>
+				<% if @active_page == page %>
+				  <a class="active" href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>&current=<%= @current_bool %>&start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+				<% else %>
+				  <a href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>&current=<%= @current_bool %>&start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+				<% end %>
+			  <% end %>
+			<% end %>
+		  <% else %>
+			<% @total_pages.times do |page| %>
+			  <% if (page + 2 >= @active_page && page - 2 <= @active_page) %>
+				<% if @active_page == page %>
+				  <a class="active" href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>&current=<%= @current_bool %>&start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+				<% else %>
+				  <a href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>&current=<%= @current_bool %>&start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+				<% end %>
+			  <% end %>
+			<% end %>
+		  <% end %>
+		  <% if @active_page + 1 < @total_pages %>
+			<a id="next" title="Next page" href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>&current=<%= @current_bool %>&start=<%= @next_val %>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+		  <% end %>
+		</div>
+	<% end %>
+<% end %>

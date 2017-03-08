@@ -1,0 +1,71 @@
+<% if @workout == nil %>
+  <h1 style="padding-top: 20px;">Oops! This workout does not exist or has been removed.</h1>
+<% else %>
+  <div class="qf-header">
+    <h1><%= @workout.workout_length %>-Minute Asiki Workout</h1>
+    <p><%= @workout.short_description %></p>
+  </div>
+  <iframe width="560" height="315" src=<%= @workout.video_url %> frameborder="0" allowfullscreen></iframe>
+
+  <% if current_user %>
+    <a class="post-results-btn"><span>Post Your Results</span></a>
+    <div class="submit-results">
+      <h2>Post Your Results</h2>
+
+      <%= form_for(Post.new, method: 'post', class: 'submit-results-form', url: url_for(controller: 'posts', action: 'create', workout_id: @workout.id, redirect_url: 'other')) do |f| %>
+        <%= f.fields_for :results_attributes do |r| %>
+          <% if @workout.rounds == true %>
+            <% @workout.exercises.each do |ex| %>
+              <% if ex.exercise_description == "Total rounds" %>
+                <div class="submit-input">
+                  <%= r.label 'Total rounds' %><br>
+                  <%= r.number_field ex.id, value: 0, min: 0 %>
+                </div>
+              <% end %>
+            <% end %>
+            <% @workout.exercises.each do |ex| %>
+              <% if ex.exercise_description != "Total rounds" %>
+                <div class="submit-input">
+                  <%= r.label ex.exercise_description + ' reps*' %><br>
+                  <%= r.number_field ex.id, value: 0, min: 0%>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <% @workout.exercises.each do |ex| %>
+              <div class="submit-input">
+                <%= r.label ex.exercise_description + ' reps' %><br>
+                <%= r.number_field ex.id, value: 0, min: 0 %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+        <br>
+        <p id="form-comment-link">Add a comment <i class="fa fa-plus-circle" aria-hidden="true" style="padding-left: 4px"></i></p>
+        <div id="form-comment-section">
+          <%= f.label :comment %><br>
+          <%= f.text_area :comment, id: 'results-comment', placeholder: 'Add a comment...', size: '30x4' %>
+          <div id="comment-warnings"><p></p></div>
+        </div>
+        <%= f.submit "Submit results", id: 'submit-results-btn' %>
+      <% end %>
+
+      <p>
+        <% if @workout.rounds == true %>
+          *Only log additional reps if a full round is not completed in time <br>
+        <% end %>
+        <% @workout.exercises.each do |exercise| %>
+          <% if exercise.exercise_description == "Total rounds" %>
+            <%= pluralize(exercise.points.to_i, "point")%> per round completed<br>
+          <% else %>
+            <%= exercise.exercise_description %> - <%= pluralize(exercise.points.to_i, "point")%> per rep<br>
+          <% end %>
+        <% end %>
+      </p>
+    </div>
+
+  <% else %>
+    <p><%= link_to "Log in", '/login' %> to submit your results!</p>
+  <% end %>
+<% end %>
+

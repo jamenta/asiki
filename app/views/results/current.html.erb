@@ -1,0 +1,21 @@
+<% if current_user %>
+  <% if @workouts == nil %>
+    <h2 style="margin-top:10px;">No results to show</h2>
+  <% elsif @workouts.length == 0 %>
+    <h2 style="margin-top:10px;">No results this week for <%= @user.first_name %> <%= @user.last_name[0,1].upcase %>...yet.</h2>
+    <% if current_user.id.to_i == @user.id.to_i %>
+      <p>Check out this week's <a href="/workouts">workouts</a> and log your results!</p>
+    <% end %>
+  <% else %>
+    <div class="qf-header">
+      <h1>This Week's Results for <%= @user.first_name %> <%= @user.last_name[0,1].upcase %>.</h1>
+    </div>
+    <%= render partial: "results_table" %>
+    <% if current_user.id.to_i == @user.id.to_i %>
+      <a href="/results/all" class="view-results-btn">View all results</a>
+    <% end %>
+  <% end %>
+<% else %>
+  <h2>Oops! You must be logged in to view this page.</h2>
+  <a href="/login">Log in</a>
+<% end %>

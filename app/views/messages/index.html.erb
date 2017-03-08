@@ -1,0 +1,22 @@
+<div class="qf-header">
+  <h1>My Messages</h1>
+</div>
+
+<% if @messages.length == 0 %>
+	<p style="padding-top: 20px;">No messages to show</p>
+<% else %>
+	<div id="messages-container">
+	  <% @messages.each do |mes| %>
+		<div class="message" id="message_<%= mes.id %>">
+		  <div class="header">
+			<%= user_image_by_id(mes.sender_id, 25) %>
+			<a data-turbolinks="false" class="message-sender" href="/profile?user=<%= mes.sender_id %>"><%= mes.first_name + ' ' + mes.last_name %></a>
+			<p class="timestamp">Sent <%= time_ago_in_words(mes.created_at)%> ago</p>
+			<a class="delete-message" title="Delete message" data-confirm="Are you sure you want to delete this message?" data-method="delete" rel="nofollow" href="/messages/<%= mes.id %>" data-remote="true"><i class="fa fa-trash" aria-hidden="true"></i></a>
+		  </div>
+		  <p class="message"><%= mes.message %></p>
+		  <div class="reply"><%= link_to "Reply", "/messages/#{mes.sender_id}", class:"reply", remote:true %></div>
+		</div>
+	  <% end %>
+	</div>
+<% end %>

@@ -1,0 +1,185 @@
+div#friends-container {
+width: 1000px;
+margin: auto;
+margin-top: 10px;
+margin-bottom: 100px;
+text-align:left;
+}
+
+div#friends-container div.friend {
+height: 90px;
+width: 480px;
+border: 1px solid #ddd;
+background-color: #FFFFFF;
+color: #000000;
+border-radius: 5px;
+display: inline-block;
+margin: 5px;
+text-align: left;
+}
+
+div#friends-container div.friend div.user-image {
+display: inline-block;
+margin: 5px 10px 5px 10px;
+vertical-align:middle;
+}
+
+div#friends-container div.friend div.friend-info {
+display: inline-block;
+vertical-align: middle;
+}
+
+div#friends-container div.friend div.friend-info a.name {
+display: inline-block;
+vertical-align: top;
+font-size: 20px;
+text-decoration:none;
+color:black;
+}
+
+div#friends-container div.friend div.friend-info a.name:hover {
+color: rgb(19, 58, 117);
+}
+
+div#friends-container div.friend div.friend-info p {
+color: #9D9D9D;
+font-size: 14px;
+}
+
+div#friends-container div.friend div.request-buttons {
+  float: right;
+  padding: 5px 10px 0 0;
+  text-align: center;
+}
+
+div#friends-container div.friend div.request-buttons a div.icon {
+ width: 25px;
+ display:inline-block;
+}
+
+div#friends-container div.friend div.request-buttons p{
+font-size: 12px;
+}
+
+div#friends-container div.friend div.request-buttons a {
+ color:color;
+ border-radius: 5px;
+ padding: 5px 5px;
+ display:block;
+ margin: 5px 0;
+ text-decoration: none;
+ font-size: 16px;
+}
+
+div#friends-container div.friend div.request-buttons a#accept-friend {
+background-color:#3EBD4F;
+}
+div#friends-container div.friend div.request-buttons a#accept-friend:hover {
+background-color: #45EA5B;
+}
+
+div#friends-container div.friend div.request-buttons a#decline-friend {
+background-color:#dc2121;
+}
+div#friends-container div.friend div.request-buttons a#decline-friend:hover {
+background-color: #fd3e3e;
+}
+
+div#friends-container div.friend div.friend-options {
+  float: right;
+  padding: 35px 0 0 0;
+}
+
+//Profile header and friends page styling 
+
+div#friends-container div.friend div.friend-options a.friend-btn, div.profile-header div#friend-wrapper div.friend-options a.friend-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  margin: 30px 5px 0 0;
+  cursor: pointer;
+  background-color: rgb(117, 161, 164);
+}
+
+div.profile-header div#friend-wrapper div.friend-options a.friend-btn {
+border: 1px solid #FFFFFF;
+}
+div.profile-header div#friend-wrapper div.friend-options {
+text-align:left;
+}
+  
+div#friends-container div.friend div.friend-options a.friend-btn:hover, div.profile-header div#friend-wrapper div.friend-options a.friend-btn:hover {
+  background-color: rgb(19, 58, 117);
+}
+
+div#friends-container div.friend div.friend-options div.dropdown, div.profile-header div#friend-wrapper div.friend-options div.dropdown {
+  display: none;
+}
+
+div#friends-container div.friend div.friend-options div.dropdown-content, div.profile-header div#friend-wrapper div.friend-options div.dropdown-content {
+  position: absolute;
+  background-color: #e0e0e0;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+}
+  
+div#friends-container div.friend div.friend-options div.dropdown div.dropdown-content a, div.profile-header div#friend-wrapper div.friend-options div.dropdown-content a {
+  padding: 10px 15px 10px 5px;
+  text-decoration:none;
+  color: #000000;
+  font-size: 14px;
+  display: block;
+  min-width: 100px;
+}
+
+div#friends-container div.friend div.friend-options div.dropdown div.dropdown-content a:hover, div.profile-header div#friend-wrapper div.friend-options div.dropdown-content a:hover {
+  background-color: #ccc;
+}
+  
+div#friends-container div.friend div.friend-options div.dropdown div.arrow-up, div.profile-header div#friend-wrapper div.friend-options div.dropdown div.arrow-up {
+  margin-top: 3px;
+  width: 0; 
+  height: 0; 
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #e0e0e0;
+}
+
+div#friends-container div.friend div.friend-options div.dropdown div.dropdown-content a div.icon, div.profile-header div#friend-wrapper div.friend-options div.dropdown-content a div.icon {
+ width: 20px;
+ display:inline-block;
+ }
+// end of profile header and friends styling
+
+
+div#friends-container div.friend div.friend-options div.dropdown div.dropdown-content a#accept-friend {
+ color: #008D3D;
+ font-size: 16px;
+ font-weight: bold;
+ }
+ 
+ div#friends-container div.friend div.friend-options div.dropdown div.dropdown-content a#decline-friend {
+ color: #D40000;
+ font-size: 16px;
+ }
+ 
+a#invite-friends {
+  background-color: #2dbb5e;
+  color: #FFFFFF;
+  height: 42px;
+  width: 60px;
+  border: 1px solid #FFFFFF;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all .4s;
+  cursor: pointer;
+  padding: 10px;
+  
+}
+
+#invite-friends:hover {
+  background-color: #4de66c;
+}
+ 

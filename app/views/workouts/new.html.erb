@@ -1,0 +1,55 @@
+<% if current_user %>
+  <% if current_user.id == current_user.id %>
+     <h1>Create New Workout</h1>
+	<%= form_for(@workout) do |f| %>
+		<%= f.label :workout_length, "Workout length" %> <br>
+      	<%= f.number_field :workout_length %> <br>
+      	<%= f.label :short_description, "Short description" %> <br>
+      	<%= f.text_field :short_description %> <br>
+      	<%= f.label :long_description, "Long description" %> <br>
+      	<%= f.text_field :long_description %> <br>
+		<%= f.label :video_url, "Video URL" %> <br>
+      	<%= f.url_field :video_url %> <br>
+	 	<%= f.label :image_url, "Image URL" %><br>
+	  	<%= f.text_field :image_url %><br>
+	 	<%= f.label :gif_url, "GIF URL" %><br>
+	  	<%= f.text_field :gif_url %><br>
+		<%= f.label :start_date %> <br>
+		<%= f.date_field :start_date %><br>
+		<%= f.label :end_date %> <br>
+		<%= f.date_field :end_date %><br><br>
+		<%= f.label :rounds, "Record rounds?" %>
+		<%= f.check_box :rounds %><br>
+	    <br>
+		<%= f.fields_for :exercises do |builder| %>
+		<p>
+		<div class="exercise-inputs" style="display:inline-block">
+		<%= builder.label :exercise_description %>
+		<%= builder.text_field :exercise_description %>
+		<%= builder.label :points %>
+		<%= builder.number_field :points %>
+		</div>
+		<div class="reps-per-round hidden">
+		  <%= builder.label :reps_per_round %>
+		  <%= builder.number_field :reps_per_round %>
+		</div>
+		</p>
+		<% end %>
+	<br>
+	<%= f.submit "SUBMIT WORKOUT" %>
+	<% end %>
+
+  <% else %>
+	<h1>Oops! You're not authorized to view this page.</h1>
+
+	<p> <%= link_to "View workouts", '/workouts' %> </p>
+  <% end %>
+
+<% else %>
+  <h1>Oops! You're not authorized to view this page.</h1>
+
+  <p> <%= link_to "View workouts", '/workouts' %> </p>
+<% end %>
+
+
+    

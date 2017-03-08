@@ -1,0 +1,88 @@
+<div class="qf-header">
+<h1><%= emojify ":trophy:", img_attrs: { title: nil}, class_name:"emoji-header-big" %> This Week's Leaderboard <%= emojify ":trophy:", img_attrs: { title: nil}, class_name:"emoji-header-big" %> </h1>
+</div>
+
+<div class="your-rank">
+
+<% if current_user %>
+<% if current_user.results_settings == 'Public' %>
+<p>Your rank this week: 
+  <%= @user_rank %>
+</p>
+<% else %>
+<p>Want to know your rank this week? Enable the "Public Results" setting in your <a href="/profile/edit">profile settings</a>.</p>
+<% end %>
+<% else %>
+<p><a href="/login">Log in</a> to see how you rank this week!</p>
+<% end %>
+
+</div>
+
+
+<div class="leaderboards">
+<table class="leaderboard-table">
+  <tr class="header">
+    <th class="col-1"></th>
+    <th class="col-2">Rank</th>
+    <th class="col-3">Name</th>
+    <th class="col-4">Location</th>
+    <th class="col-5">Points</th>
+    <th class="col-6">Minutes</th>
+    <th class="col-7"></th>
+  </tr>
+<% @top_results.each do |result| %>
+  <% if current_user %>
+    <% if current_user.id == result["user_id"] %>
+      <tr class="current-user-row">
+    <% else %>
+      <tr>
+    <% end %>
+  <% else %>
+	<tr>
+  <% end %>
+      <td class="col-1">
+        <%= user_image_by_id(result["user_id"], 40) %> 
+      </td>
+      <td class="col-2"> <%= result["rank"] %> </td>
+	<% if current_user %>
+      <% if current_user.id == result["user_id"] %>
+        <td class="col-3" title="That's you!">
+      <% else %>
+        <td class="col-3">
+      <% end %>
+	<% else %>
+	   <td class="col-3">
+	<% end %>
+      <a class="table-name" data-turbolinks="false" href="/profile?user=<%= result["user_id"] %>"><%= result["first_name"] %> <%= result["last_name"][0,1].upcase %>.</a></td>
+      <td class="col-4"> <%= result["state"] %> </td>
+      <td class="col-5"> <%= number_with_delimiter(result["total_points"]) %> </td>
+      <td class="col-6"> <%= number_with_delimiter(result["total_mins"]) %> </td>
+      <td class="col-7"><a class="table-results" href="/results/current/<%= result["user_id"] %>">View Results</a></td>
+     </tr>
+
+<% end %>
+</table>
+
+</div>
+
+<div class="qf-header" style="margin: 80px 0 40px 0;">
+<h1><%= emojify ":sports_medal:", img_attrs: { title: nil}, class_name:"emoji-header-big" %> This Week's Top Performances <%= emojify ":sports_medal:", img_attrs: { title: nil}, class_name:"emoji-header-big" %> </h1>
+</div>
+
+<div id="performance-container">
+  <% @workouts_array.each do |w| %>
+    <div class="top-individual">
+      <h3>Best <%= w %>-Minute Workout</h3>
+        <% if @top_performers[w] %>
+          <p class="top-p" style="padding-top: 10px;"><%= user_image_by_id(@top_performers[w]["user_id"], 40) %> <a class="name" data-turbolinks="false" href="/profile?user=<%= @top_performers[w]["user_id"] %>"><%= @top_performers[w]["first_name"] + " " + @top_performers[w]["last_name"][0,1].upcase + "." %></a></p> 
+          <p class="top-p" style="font-size: 40px; padding: 10px 0 10px 0;"><%= number_with_delimiter(@top_performers[w]["total_points"]) %> points</p>
+          <p class="top-p">Completed on: <%= @top_performers[w]["created_at"].to_date.strftime("%m/%d/%y") %></p>
+          <p class="top-p"><a class="view-result" href='/results/post/<%= @top_performers[w]["post_id"].to_s %>/user/<%= @top_performers[w]["user_id"].to_s %>?back_to=current'>View Result</a></p>
+        <% else %>
+          <p style="padding-top: 10px;">No one has completed a <a class="workout-link" href="<%= '/current/' + w.to_s %>"><%= w %>-minute workout</a>...yet.</p>
+        <% end %> 
+    </div>
+  <% end %>
+</div>
+
+

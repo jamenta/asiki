@@ -1,0 +1,10 @@
+<% if @success_bool %>
+  <% if @profile_bool %>
+    $('div#friend-wrapper div.friend-options').replaceWith("<%= j render("request_friend_btn") %>");
+  <% else %>
+    $('div#user_<%= @friend1.friend_id %>').remove();
+  <% end %>
+<% else %>
+  alert("Friend could not be removed at this time. Please try again later.");
+<% end %>
+  

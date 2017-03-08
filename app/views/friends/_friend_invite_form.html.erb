@@ -1,0 +1,20 @@
+<div id="invite-form">
+ <a id="hide-invitations"><i class="fa fa-close" aria-hidden="true" title="Hide" style="font-size: 18px;"></i></a>
+ <h1>Invite Friends</h1>
+ <%= form_for(FriendInvitation.new, remote: true, :method => :post, url: "/friend-invitations") do |f| %>
+   <%= f.label :email, "Email:" %>
+   <%= f.email_field :email, placeholder: "someone@domain.com" %>
+   <%= f.submit "Invite", id: "add-friend-invite-btn" %>
+ <% end %>
+ <div id="message-display"></div>
+ <h2 id="outstanding-invites-header">Outstanding invitations</h2>
+ <div id="outstanding-invites">
+  <% @outstanding_invites.each do |i| %>
+    <div class="invited">
+      <div class="emoji-invited"><%= emojify ":sleuth_or_spy::skin-tone-2:", img_attrs: { title: nil} %> </div>
+      <p><%= i.email %></p>
+    </div>
+  <% end %>
+ </div>
+
+</div>

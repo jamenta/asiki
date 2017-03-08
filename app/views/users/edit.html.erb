@@ -1,0 +1,56 @@
+<h1 style="padding-top: 20px;">Edit your profile settings</h1>
+
+<div id="privacy-info">
+  <a id="hide"><i class="fa fa-close" aria-hidden="true" title="Hide" style="font-size: 18px;"></i></a>
+  <div id="info-container">
+    <h1>Privacy options</h1>
+    <h3>Public results</h3>
+    <p>All results that you post for your workouts will be visible to the public. Anyone with an Asiki account will be able to see your results by viewing your profile. You will also be eligible to be ranked in the Global Leaderboards every week among all other Asiki users with public accounts.</p>
+    <h3>Private results</h3>
+    <p>Only you will be able to view workout results that you post; no one else will be able to view your profile. You will not be eligible for Global Leaderboards rankings.</p>
+  </div>
+</div>
+    
+<div class="new-user">
+<%= form_for(@user, :method => :patch, remote: true, :url => url_for(:controller => 'users', :action => 'update'))  do |f| %>
+	<div class="signup-container">
+ 	  <%= f.label :first_name %>
+	  <%= f.text_field :first_name, :placeholder => "First name", :class => "all-form-input" %>
+	</div>
+	<div class="signup-container">
+	  <%= f.label :last_name %>
+	  <%= f.text_field :last_name, :placeholder => "Last name", :class => "all-form-input" %>
+	</div>
+	<div class="signup-container">
+	  <%= f.label :state %>
+	  <%= f.select :state, @states, include_blank: true %>
+	</div>
+	<div id="results-settings">
+	  <%= f.label :results_settings, raw('Results <i id="show-privacy-info" class="fa fa-question-circle-o" aria-hidden="true" title="Click to learn more about privacy settings"></i>') %>
+	  <%= f.select :results_settings, ['Public', 'Private'] %>
+	</div>
+     <br>
+</div>
+  <div id="emoji-options" style="padding: 10px;">
+    <p style="font-size: 16px;">Select an emoji avatar...</p>
+    <%= render partial: "emoji_options" %>
+    <p style="font-size: 16px; margin-bottom:20px">or...</p>
+	<div id="gravatar-checkbox"><%= f.check_box :gravatar_bool %></div><p style="font-size: 16px; display:inline-block;">Use a <a href="http://en.gravatar.com/" id="gravatar-link" target="_blank">Gravatar</a> email address</p>
+  </div>
+  <% if @user.gravatar_bool == true %>
+    <div id="gravatar-display">
+	  <%= f.label :gravatar, "Gravatar email"%>
+	  <%= f.email_field :gravatar, id: "gravatar-input" %>
+    </div>
+  <% else %>
+    <div id="gravatar">
+	  <%= f.label :gravatar, "Gravatar email"%>
+	  <%= f.email_field :gravatar, id: "gravatar-input" %>
+    </div>
+  <% end %>
+  <%= f.hidden_field :emoji_title %>
+  <%= f.submit "Save changes", :class => "submit-btn", :id => "edit-user-btn" %>
+	
+<% end %>
+
+

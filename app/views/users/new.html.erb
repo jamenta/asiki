@@ -1,0 +1,34 @@
+<div class="qf-header">
+<h1>Create your new Asiki account!</h1>
+</div>
+
+<div class="new-user">
+    
+<%= form_for(@user, :method => :post, :url => url_for(:controller => 'users', :action => 'create'))  do |f| %>
+	<div class="signup-container">
+ 	  <%= f.label :first_name %>
+	  <%= f.text_field :first_name, :placeholder => "First name", :class => "all-form-input" %>
+	</div>
+	<div class="signup-container">
+	<%= f.label :last_name %>
+	<%= f.text_field :last_name, :placeholder => "Last name", :class => "all-form-input" %>
+	</div>
+	<div class="signup-container">
+	<%= f.label :email %>
+	<%= f.email_field :email, :placeholder => "you@domain.com", :class => "all-form-input" %>
+	</div>
+	<div class="signup-container">
+	<%= f.label :state %>
+	<%= f.select :state, @states, include_blank: true %>
+	</div>
+	<div class="signup-container">
+	<%= f.label :password %>
+	<%= f.password_field :password, :placeholder => "Must be at least 8 characters", :class => "all-form-input" %>
+	</div>
+     <br>
+	<div class="signup-container">
+	<%= f.submit "Create account", :class => "submit-btn" %>
+	</div>
+<% end %>
+
+</div>

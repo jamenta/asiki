@@ -1,0 +1,11 @@
+$('a#favorite-result').replaceWith("<%= j link_to(raw(emojify ":heart:", img_attrs: { title: "Like this workout result" }, class_name: "emoji-favorite"), "/favorites/#{@post_id}?back_to=#{@back_to}&total=#{@total}", id: "favorite-result", remote: true, method: "post") %>");
+<% if @total == 0 %>
+  $('div#favorite-count').replaceWith('<div id="favorite-count"></div>');
+  $('div#hidden-favorites').remove();
+<% else %>
+  $("a#fav-user-<%= j current_user.id.to_s %>").remove();
+  $('div#favorite-count p').replaceWith("<p><%= j @total.to_s %></p>");
+<% end %>
+
+
+

@@ -1,0 +1,25 @@
+<h1 style="padding: 20px 0 20px 0; font-weight: normal;">Create a new contest</h1>
+
+<div id="new-contest">
+ <%= form_for(@contest, remote: true) do |f| %>
+  <div class="new-contest-name">
+    <%= f.label :contest_name%>
+    <%= f.text_field :contest_name, placeholder: "Name your contest!" %>
+  </div>
+  <div id="new-contest-warnings"><p></p></div>
+  <div class="new-contest-date">
+    <%= f.label :start_date, "Start" %>
+    <%= f.date_field :start_date%>
+  </div>
+  <div class="new-contest-date">
+    <%= f.label :end_date, "Finish" %>
+    <%= f.date_field :end_date %>
+  </div>
+  <div id="emoji-options" style="padding:30px 0 20px 0">
+    <p style="font-size: 16px;">Select an emoji avatar for your contest:</p>
+    <%= render partial: "emoji_options" %>
+  </div>
+  <%= f.hidden_field :emoji_title %>
+  <%= f.submit "Create contest", id:"create-contest-btn" %>
+ <% end %>
+</div>

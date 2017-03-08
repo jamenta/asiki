@@ -1,14 +1,94 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Asiki</title>
+    <title>Asiki Fitness</title>
+    <script src="https://use.fontawesome.com/1bd1fdf468.js"></script>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% if content_for? :profile_charts %>
+      <%= yield :profile_charts %>
+    <% end %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <% if content_for? :workouts_home_head %>
+      <%= yield :workouts_home_head %>
+    <% end %>
 
+  </head>
   <body>
+
+<% if notice %>
+  <% if notice[0,14] == "/results/post/" %>
+    <div class="good-results-wrapper">
+      <p>Results logged successfully! <a href="<%= notice %>">View results</a>. <div class="close-notice-icon"><i class="fa fa-close" aria-hidden="true"></i></div></p>
+    </div>
+  <% else %>
+    <div class="good-notice-wrapper">
+      <p><%= notice %><div class="close-notice-icon"><i class="fa fa-close" aria-hidden="true"></i></div><p>
+    </div>
+  <% end %>
+<% elsif alert %>
+  <div class="bad-alert-wrapper">
+     <p><%= alert %><div class="close-notice-icon"><i class="fa fa-close" aria-hidden="true"></i></div><p>
+  </div>    
+<% end %>
+
+<div class="menu-bar">
+  <a href="/workouts" class="logo"><%= image_tag "logo.JPG", :title => "Asiki", :size => '130x40', :style => "vertical-align: middle; line-height: 46px;" %></a>
+	<ul class="left">
+  	 <li class="dropdown">
+    		<a href="/workouts" class="dropbtn">Weekly Workouts <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    		<div class="dropdown-content">
+      		<a class="no-icon" href="/current/1">1-Minute Workout</a>
+      		<a class="no-icon" href="/current/3">3-Minute Workout</a>
+      		<a class="no-icon" href="/current/5">5-Minute Workout</a>
+      		<a class="no-icon" href="/current/10">10-Minute Workout</a>
+      		<a class="no-icon" href="/workouts-all">All Workouts</a>
+    		</div>
+ 	  </li>
+	  <li class="dropdown"><a class="dropbtn" href="/leaderboards">Leaderboards</a></li>
+      </ul>
+      <ul class="right">
+  <% if current_user %>
+	  <li class="dropdown">
+	  	<a href="/contests" class="dropbtn">My Contests <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+      	<div class="dropdown-content">
+              <% if contest_list %>
+                <% contest_list.each do |c| %>
+ 		   	      <a class="no-icon" href="/contests/<%= c["id"] %>"><%= c["contest_name"] %></a>
+		        <% end %>
+              <% end %>
+  	        <a class="with-icon" id="menu-contests" href="/contests/new"><div class="menu-icon"><i class="fa fa-plus-square" aria-hidden="true"></i></div>Create a new contest</a>
+      	</div>
+	  </li>
+  	  <li class="dropdown">
+		<a href="/profile" class="dropbtn" data-turbolinks="false"><%= current_user.first_name %> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+		<div class="dropdown-content">
+			<a class="with-icon" id="menu-profile" href="/profile" data-turbolinks="false" ><div class="menu-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></div>Profile</a>
+			<a class="with-icon" id="menu-friends" href="/friends"><div class="menu-icon"><i class="fa fa-group" aria-hidden="true"></i></div>Friends</a>
+            <a class="with-icon" id="menu-results" href="/results/all"><div class="menu-icon"><i class="fa fa-list-ul" aria-hidden="true"></i></div>Results</a>
+		 	<a class="with-icon" id="menu-messages" href="/messages"><div class="menu-icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>Messages</a>
+			<a class="with-icon" id="menu-settings" href="/profile/settings" data-turbolinks="false"><div class="menu-icon"><i class="fa fa-cog" aria-hidden="true"></i></div>Settings</a>
+			<a class="with-icon" id="menu-logout" rel="nofollow" data-method="delete" href="/logout"><div class="menu-icon"><i class="fa fa-sign-out" aria-hidden="true"></i></div>Log out</a>
+		</div>
+	  </li>
+	  <li class="notifications">
+		<%= render partial: "layouts/notifications" %>
+	  </li>
+	</ul>
+  <% else %> 
+  	  <li class="dropdown"><%= link_to "Log in", '/login', class: "dropbtn" %></li>
+  	  <li class="dropdown"><%= link_to "Sign up", '/signup', class: "dropbtn" %></li>
+	</ul>
+  <% end %>
+</div>
+
+<div>
     <%= yield %>
+</div>
+
+<div>
+<!--<%= render partial: "layouts/bottom" %> -->
+</div>
+
   </body>
 </html>

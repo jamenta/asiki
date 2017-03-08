@@ -1,0 +1,104 @@
+#display-comments-section {
+  padding-top: 5px;
+  height: 295px;
+  overflow-y: scroll;
+}
+
+#display-comments-section .comment-container, #display-comments-section .user-comment-container  {
+  margin: 2px;
+  border-radius: 5px;
+  color: black;
+  text-align: left;
+  vertical-align: top;
+  overflow-x: hidden;
+  padding-bottom: 2px;
+}
+
+#display-comments-section .user-comment-container {
+  background-color: #E8ECFE;
+}
+
+#display-comments-section .comment-container {
+ background-color: #F9F9F9;
+}
+
+#display-comments-section .comment-container .comment-header, #display-comments-section .user-comment-container .comment-header {
+  display: inline-block;
+  vertical-align: top; 
+  padding: 2px;
+  width: 100%;
+}
+
+#display-comments-section .comment-container .comment-header .comment-image, #display-comments-section .comment-container .comment-header aname, #display-comments-section .comment-container .comment-header p, #display-comments-section .user-comment-container .comment-header .comment-image, #display-comments-section .user-comment-container .comment-header a.name, #display-comments-section .user-comment-container .comment-header p {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 2px;
+}
+
+#display-comments-section .comment-container .comment-content, #display-comments-section .user-comment-container .comment-content {
+  display: inline-block;
+}
+
+
+p.timestamp {
+  color:#838383;
+  font-size: 12px;
+}
+
+#display-comments-section .comment-container .comment-content .comment-header a.name, #display-comments-section .user-comment-container .comment-content .comment-header a.name  {
+  font-size: 14px;
+  color: rgb(19, 58, 117);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#display-comments-section .comment-container .comment-content .comment-header a.name:hover, #display-comments-section .user-comment-container .comment-content .comment-header a.name:hover  {
+  color: rgb(117, 161, 164);
+}
+
+#display-comments-section .comment-container .comment-content .comment, #display-comments-section .user-comment-container .comment-content .comment  {
+  padding-left: 34px;
+  padding-top: 1px;
+  font-size: 14px;
+  max-width: 460px;
+  overflow: hidden;
+}
+
+#add-comment-btn{
+ height: 32px;
+ width: 42px;
+ color: #FFFFFF;
+ background-color: rgb(19, 58, 117);
+ cursor: pointer;
+ border: none;
+}
+#add-comment-btn:hover{
+ background-color: rgb(117, 161, 164);
+}
+
+.add-comment-section form input {
+ vertical-align: top;
+}
+
+a.delete-comment {
+  color: #585858;
+  float: right;
+  padding: 5px 15px 0 0;
+  display: none;
+  font-size: 18px;
+}
+a.delete-comment:hover {
+color:#FE4E4E;
+}
+
+div#contest-comment-warnings {
+  height: 13px;
+  border-bottom: 1px solid #ddd;
+  text-align: top;
+}
+
+div#contest-comment-warnings p {
+  color: red;
+  font-size: 12px;
+  vertical-align: top;
+}

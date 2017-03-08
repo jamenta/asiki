@@ -1,0 +1,24 @@
+<h1 style="padding: 20px 0 20px 0; font-weight: normal;">Edit contest settings</h1>
+
+<div id="edit-contest">
+ <%= form_for(@contest, remote: true, method: :patch, url: url_for(controller: 'contests', action: 'update')) do |f| %>
+  <div class="edit-contest-name">
+    <%= f.label :contest_name%>
+    <%= f.text_field :contest_name, placeholder: "Name your contest!" %>
+  </div>
+  <div class="edit-contest-date">
+    <%= f.label :start_date, "Start" %>
+    <%= f.date_field :start_date%>
+  </div>
+  <div class="edit-contest-date">
+    <%= f.label :end_date, "Finish" %>
+    <%= f.date_field :end_date %>
+  </div>
+  <div id="emoji-options" style="padding:20px 0 0 10px">
+    <p style="font-size: 16px;">Select an emoji avatar for your contest:</p>
+    <%= render partial: "edit_emoji_options" %>
+  </div>
+  <%= f.hidden_field :emoji_title %>
+  <%= f.submit "Save changes", id:"edit-contest-btn" %>
+ <% end %>
+</div>

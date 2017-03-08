@@ -1,0 +1,13 @@
+<div id="favorite-stuff">
+  <%= link_to(raw(emojify ":heart:", img_attrs: { title: "You liked this workout result" }, class_name: "emoji-favorite favorited"), "/favorites/#{@favorite.id}?back_to=#{@back_to}&total=1", id: 'favorite-result', remote: true, method: 'delete') %>
+  <div id="hover-wrapper">
+	  <div id="favorite-count"><p>1</p></div>
+	  <div id="hidden-favorites">
+		<div class="arrow-up"></div>
+		<div id="favorite-users-wrapper">
+		  <a href="/profile?user=<%= current_user.id %>" class="favorite-user"><%= current_user.first_name + ' ' + current_user.last_name[0,1] + '.' %></a>
+		</div>
+	  </div>
+  </div>
+</div>
+

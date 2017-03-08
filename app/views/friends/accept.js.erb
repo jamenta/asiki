@@ -1,0 +1,12 @@
+<% if @success_bool %>
+  $('div#user_<%= @friend1.friend_id %>').children('div.request-buttons').replaceWith("<%= j render("friend_dropdown") %>");
+  $("div.friend-options").mouseover( function() {
+    $(this).children('div.dropdown').show()
+	});
+  $("div.friend-options").mouseleave( function() {
+    $(this).children('div.dropdown').hide()
+	});
+<% else %>
+  alert("Friend request could not be accepted at this time. Please try again later.")
+<% end %>
+  

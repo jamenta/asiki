@@ -1,0 +1,13 @@
+<% (0..2).each do |num| %>
+  <div class="emoji-option-row">
+    <% @emoji_array[(num * 8)..((num * 8) + 7)].each do |e| %>
+      <div class="emoji-option">
+        <% if @user.emoji_title == e %>
+          <%= emojify e, img_attrs: { title: nil, id: e }, class_name: "active-emoji" %>
+        <% else %>
+          <%= emojify e, img_attrs: { title: nil, id: e } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<% if @total == 1 %>
+  $('div#favorite-stuff').replaceWith("<%= j render "add_favorite_zero" %>");
+  $("div#hover-wrapper").mouseover(function(){
+    $("div#hidden-favorites").show();
+    });
+  $("div#hover-wrapper").mouseleave(function(){
+    $("div#hidden-favorites").hide();
+    });
+<% else %>
+  $('a#favorite-result').replaceWith("<%= j link_to(raw(emojify ":heart:", img_attrs: { title: "You liked this workout result" }, class_name: "emoji-favorite favorited"), "/favorites/#{@favorite.id}?back_to=#{@back_to}&total=#{@total}", id: "favorite-result", remote: true, method: "delete") %>");
+  $('div#favorite-count p').replaceWith("<p><%= j @total.to_s %></p>");
+  $('div#favorite-users-wrapper').append("<%= j render "user_link" %>");
+<% end %>
+
+

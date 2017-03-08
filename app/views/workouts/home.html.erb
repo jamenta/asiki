@@ -1,0 +1,39 @@
+<% content_for :workouts_home_head do %>
+
+  <script>
+document.head.insertAdjacentHTML('beforeend', 
+'<style><% [1,3,5,10].each do |x| %><%= "#workout-wrapper-" + x.to_s + " #workout-img-" + x.to_s + "{background-image:url("+ @workouts[x][:image_url] + ");} " + "#workout-wrapper-" + x.to_s + ":hover #workout-img-" + x.to_s + "{background-image:url("+ @workouts[x][:gif_url] + ");} "%><% end %></style>');
+  </script>
+
+<% end %>
+
+<div class="workouts">
+  <h1 class="workout-header">Asiki Weekly Workouts</h1>
+  <div class="workout-pair">
+    <% [1,3].each do |i| %>
+      <div class="workout-wrapper" id="<%= 'workout-wrapper-' + i.to_s %>" >
+        <p class="workout-length"><%= i %>-Minute Workout</p>
+        <p class="workout-description"><%= @workouts[i][:short_description] %></p>
+        <div class="image-wrapper">
+          <div class="workout-image" id="<%= 'workout-img-' + i.to_s %>"></div>
+        </div>
+        <a href="<%= '/current/' + i.to_s %>"class="view-workout-btn">View Workout</a>
+      </div>
+    <% end %>
+  </div>
+  <div class="workout-pair">
+    <% [5,10].each do |i| %>
+      <div class="workout-wrapper" id="<%= 'workout-wrapper-' + i.to_s %>" >
+        <p class="workout-length"><%= i %>-Minute Workout</p>
+        <p class="workout-description"><%= @workouts[i][:short_description] %></p>
+        <div class="image-wrapper">
+          <div class="workout-image" id="<%= 'workout-img-' + i.to_s %>"></div>
+        </div>
+        <a href="<%= '/current/' + i.to_s %>"class="view-workout-btn">View Workout</a>
+      </div>
+    <% end %>
+  </div>
+  <a href="/workouts-all" class="all-workouts-btn">View All Workouts</a>
+</div>
+
+

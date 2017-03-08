@@ -1,0 +1,10 @@
+$('#display-comments-section').prepend("<%= j render(@contest_comment) %>");
+$('#add_comment_field').val("");
+$('#contest_comment_<%= @contest_comment.id %>').mouseover(function() {
+  $(this).children('.delete-comment').show();
+  });
+$('#contest_comment_<%= @contest_comment.id %>').mouseleave(function() {
+  $(this).children('.delete-comment').hide();
+  });
+
+$("div#contest-comment-warnings p.warning").replaceWith("<p></p>");

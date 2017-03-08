@@ -1,0 +1,43 @@
+<% if @total_pages > 1 %>
+	<div id="pagination">
+	  <% if @start != 0 %>
+		<a id="previous" title="Previous page" href="/workouts-all?start=<%= @prev_val %>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+	  <% end %>
+	  <% if [0,1,2].include? @active_page %>
+		<% @total_pages.times do |page| %>
+		  <% if page > 4 %>
+			<% break %>
+		  <% else %>
+			<% if @active_page == page %>
+			  <a class="active" href="/workouts-all?start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+			<% else %>
+			  <a href="/workouts-all?start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+			<% end %>
+		  <% end %>
+		<% end %>
+	  <% elsif [@total_pages - 1, @total_pages - 2, @total_pages - 3].include? @active_page %>
+		<% @total_pages.times do |page| %>
+		  <% if [@total_pages - 1, @total_pages - 2, @total_pages - 3, @total_pages - 4, @total_pages - 5].include? page %>
+			<% if @active_page == page %>
+			  <a class="active" href="/workouts-all?start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+			<% else %>
+			  <a href="/workouts-all?start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+			<% end %>
+		  <% end %>
+		<% end %>
+	  <% else %>
+		<% @total_pages.times do |page| %>
+		  <% if (page + 2 >= @active_page && page - 2 <= @active_page) %>
+			<% if @active_page == page %>
+			  <a class="active" href="/workouts-all?start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+			<% else %>
+			  <a href="/workouts-all?start=<%= page * @items_per_page %>"><%= page + 1 %></a>
+			<% end %>
+		  <% end %>
+		<% end %>
+	  <% end %>
+	  <% if @active_page + 1 < @total_pages %>
+		<a id="next" title="Next page" href="/workouts-all?start=<%= @next_val %>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+	  <% end %>
+	</div>
+<% end %>

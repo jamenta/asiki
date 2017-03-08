@@ -1,0 +1,18 @@
+<% if contest_comment.user_id.to_i == current_user.id.to_i %>
+ <div class="user-comment-container" id="contest_comment_<%= contest_comment.id %>">
+<a class="delete-comment" title="Delete comment" data-confirm="Are you sure you want to delete this comment?" data-method="delete" rel="nofollow" href="/contests/<%=contest_comment.contest_id %>/comments/<%= contest_comment.id %>" data-remote="true">
+<i class="fa fa-trash" aria-hidden="true"></i></a>
+<% else %>
+ <div class="comment-container" id="contest_comment_<%= contest_comment.id %>">
+<% end %>
+  <div class="comment-content">
+    <div class="comment-header">
+      <div class="comment-image"><%= user_image_by_id(contest_comment.user_id, 20) %></div>
+      <a class="name" data-turbolinks="false" href="/profile?user=<%= contest_comment.user_id %>"><%= current_user.first_name + " " + current_user.last_name[0,1].upcase %>.</a>
+      <p class="timestamp"><%= time_ago_in_words(contest_comment.created_at) %> ago</p>
+    </div>
+    <div class="comment">
+       <p><%= contest_comment.comment %></p>
+    </div>
+  </div>
+ </div>

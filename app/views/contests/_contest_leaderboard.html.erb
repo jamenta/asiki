@@ -1,0 +1,35 @@
+      <div class="contest-leaderboard">
+        <h2> <%= emojify ":trophy:", img_attrs: { title: nil}, class_name:"emoji-header" %> Contest Leaderboard <%= emojify ":trophy:", img_attrs: { title: nil}, class_name:"emoji-header" %></h2>
+        <table class="contest-table">
+          <tr class="header">
+            <th class="col-1"></th>
+            <th class="col-2">Rank</th>
+            <th class="col-3">Name</th>
+            <th class="col-4">Location</th>
+            <th class="col-5">Points</th>
+            <th class="col-6">Minutes</th>
+            <th class="col-7"></th>
+          </tr>
+         <% @leaderboards.each do |a| %>
+          <% if current_user.id.to_i == a["points_user"].to_i %>
+            <tr class="current-user-row">
+          <% else %>
+            <tr>
+          <% end %>
+            <td class="col-1"><%= user_image_by_id(a['points_user'], 25) %></td>
+            <td class="col-2"><%= a["rank"] %></td>
+            <% if a["first_name"].length > 12 && a["first_name"].length < 20 %>
+              <td class="col-3" style="font-size:12px"><a data-turbolinks="false" class="user-link" href="/profile?user=<%= a['points_user'] %>"><%= a["first_name"] %> <%= a["last_name"][0,1].upcase %>.</a></td>
+            <% elsif a["first_name"].length >= 20 %>
+             <td class="col-3" style="font-size:10px"><a data-turbolinks="false" class="user-link" href="/profile?user=<%= a['points_user'] %>"><%= a["first_name"] %> <%= a["last_name"][0,1].upcase %>.</a></td>
+            <% else %>
+             <td class="col-3"><a data-turbolinks="false" class="user-link" href="/profile?user=<%= a['points_user'] %>"><%= a["first_name"] %> <%= a["last_name"][0,1].upcase %>.</a></td>
+            <% end %>
+            <td class="col-4"><%= a["state"] %></td>
+            <td class="col-5"><%= number_with_delimiter(a["total_points"]) %></td>
+            <td class="col-6"><%= a["total_minutes"] %></td>
+            <td class="col-7"><a class="view-results" href="/results?user=<%= a["points_user"] %>&start_date=<%= @contest.start_date %>&end_date=<%= @contest.end_date %>&current=true">View Results</a></td>
+           <tr>
+         <% end %>
+        </table>
+      </div>

@@ -1,3 +1,79 @@
-// Place all the styles related to the welcome controller here.
+// Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.welcome-page {
+background: url("home_page.jpg") no-repeat 50% 50%;
+background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+-webkit-background-size: cover;
+}
+
+.welcome-button {
+  display: inline-block;
+  background-color: rgb(117, 161, 164);
+  border: 2px solid white;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 500px;
+  height: 30px;
+  transition: all 0.4s;
+  margin: 0 auto;
+  margin-bottom: 250px;
+  border-radius: 5px;
+}
+
+.welcome-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+
+.welcome-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.4s;
+}
+
+.welcome-button:hover span {
+  padding-right: 25px;
+}
+
+.welcome-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.welcome-button:hover {
+    background-color: rgb(19, 58, 117);
+}
+
+h2.intro, p.intro, h1.intro {
+	color: white;
+	text-color: white;
+}
+
+h1.intro{
+  padding-top: 10px;
+  margin-bottom: 2px;
+  font-size: 66px;
+}
+h2.intro{
+	margin-bottom: 300px;
+     font-size: 16px;
+     font-style: italic;
+     font-weight: normal;
+}
+
+p.intro{
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+

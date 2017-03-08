@@ -1,0 +1,32 @@
+div#pagination a {
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid white;
+  margin: 0 5px 0 5px;
+  //padding: 5px 10px 5px 10px;
+  width: 35px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-block;
+  transition: all .4s;
+  font-weight: bold;
+  border: 2px solid #FFFFFF;
+}
+
+div#pagination a:hover {
+  background-color: #FFFFFF;
+  color: rgb(19, 58, 117);
+}
+
+div#pagination a.active {
+  background-color: #FFFFFF;
+  color: rgb(19, 58, 117);
+  border: 2px solid rgb(19,58,117);
+  box-shadow: 1px 1px 1px 1px rgba(19,58,117,0.70);
+}
+
+div#pagination{
+ margin-bottom: 20px;
+}

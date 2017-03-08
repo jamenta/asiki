@@ -1,0 +1,135 @@
+table{
+margin: auto;
+}
+
+table.contest-table {
+  color: black;
+  margin: auto;
+  border-collapse: collapse;
+  margin-left: 10px;
+  margin-right: 10px;
+  table-layout: fixed;
+  text-align: left;
+  min-width: 530px;
+  max-width: 530px;
+  font-size: 14px;
+}
+
+.contest-table th, .contest-table td {
+  border-bottom: 1px solid #ddd;
+}
+
+.contest-table td.col-1, .contest-table th.col-1,  {
+  width: 25px;
+  padding: 10px 10px 10px 5px;
+}
+.contest-table td.col-2, .contest-table th.col-2,  {
+  width: 30px;
+  padding-right: 10px;
+}
+.contest-table td.col-3, .contest-table th.col-3,  {
+  width: 100px;
+  max-width: 140px;
+  padding-right: 10px;
+  overflow: hidden;
+}
+.contest-table td.col-4, .contest-table th.col-4,  {
+  max-width: 140px;
+  min-width: 90px;
+  padding-right: 10px;
+}
+.contest-table td.col-5, .contest-table th.col-5,  {
+  width: 30px;
+  padding-right: 10px;
+}
+.contest-table td.col-6, .contest-table th.col-6,  {
+  width: 30px;
+}
+.contest-table td.col-7, .contest-table th.col-7,  {
+  max-width: 84px;
+  min-width: 84px;
+}
+
+.contest-table a.view-results{
+ background-color: rgb(19, 58, 117);
+ color: white;
+ font-size: 12px;
+ text-decoration: none;
+ padding:5px;
+ border-radius: 5px;
+ margin-right: 3px;
+}
+
+.contest-table a.view-results:hover { 
+ background-color: rgb(117, 161, 164); 
+}
+
+.contest-table tr:hover{
+  background-color: #F7FCFE;
+}
+.contest-table tr.header:hover{
+  background-color: #FFFFFF;
+}
+
+.contest-table tr.current-user-row {
+ background-color: #E8ECFE;
+ font-weight: bold;
+}
+
+.contest-table tr.current-user-row:hover {
+background-color: #CFE6F0;
+}
+
+.contest-table tr.current-user-row a {
+ font-weight: normal;
+}
+
+table.all-workouts-table, table.all-contests-table, table.show-results-table {
+  text-align: left;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+.all-workouts-table th, .all-contests-table th, .show-results-table th {
+ padding-top: 20px;
+ padding-bottom: 5px;
+}
+
+.all-workouts-table tr:hover, .all-contests-table tr:hover, .show-results-table tr:hover {
+ background-color: #616161;
+}
+
+.all-workouts-table tr.top-row:hover, .all-contests-table tr.top-row:hover, .show-results-table tr.top-row:hover {
+ background-color: #4C534F;
+}
+
+
+.all-workouts-table td, .all-contests-table th, .show-results-table th {
+ padding: 5px 0px 5px 0px;
+}
+
+.all-workouts-table th, .all-workouts-table td, .all-contests-table th, .all-contests-table td, .show-results-table th, .show-results-table td {
+ border-bottom: 1px solid #ddd;
+}
+
+.all-workouts-table td a, .all-contests-table td a, .show-results-table td a {
+ background-color: rgb(19, 58, 117);
+ color: #FFFFFF;
+ border: 1px solid #FFFFFF;
+ text-decoration: none;
+ padding:5px;
+ border-radius: 5px;
+ transition: background-color .3s;
+ min-width: 100px;
+}
+
+.all-workouts-table td a:hover, .all-contests-table td a:hover, .show-results-table td a:hover {
+background-color: rgb(117, 161, 164); 
+}
+
+.show-results-table td {
+ height: 40px;
+}
+
+
+

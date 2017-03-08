@@ -1,0 +1,30 @@
+<div class="top-four">
+  <h2><%= emojify ":sports_medal:", img_attrs: { title: nil}, class_name: "emoji-header" %> Top Performances <%= emojify ":sports_medal:", img_attrs: { title: nil}, class_name: "emoji-header" %></h2>
+
+  <% @workouts_array.each do |w| %>
+    <div class="best-performer">
+      <h3>Best <%= w %>-Minute Workout</h3>
+        <div class="performer-container">
+        <% if @top_performers[w] %>
+          <table class="performer-table">
+            <tr>
+              <td style="width:25px; padding-left: 10px;"><%= user_image_by_id(@top_performers[w]["user_id"].to_i, 25) %> </td>
+              <% if @top_performers[w]["first_name"].length > 12 && @top_performers[w]["first_name"].length < 20 %>
+               <td style="width:70px; max-width: 140px; padding: 0 10px 0 5px; overflow:hidden; font-size:14px;"><a class="contest-user-link" data-turbolinks="false" href="/profile?user=<%= @top_performers[w]['user_id'] %>"><%= @top_performers[w]["first_name"] + " " + @top_performers[w]["last_name"][0,1].upcase + "." %></td>
+              <% elsif @top_performers[w]["first_name"].length >= 20 %>
+               <td style="width:70px; max-width: 140px; padding: 0 10px 0 5px; overflow:hidden; font-size:12px;"><a class="contest-user-link" data-turbolinks="false" href="/profile?user=<%= @top_performers[w]['user_id'] %>"><%= @top_performers[w]["first_name"] + " " + @top_performers[w]["last_name"][0,1].upcase + "." %></td>       
+              <% else %>
+                <td style="width:70px; max-width: 140px; padding: 0 10px 0 5px; overflow:hidden"><a class="contest-user-link" data-turbolinks="false" href="/profile?user=<%= @top_performers[w]['user_id'] %>"><%= @top_performers[w]["first_name"] + " " + @top_performers[w]["last_name"][0,1].upcase + "." %></td>
+              <% end %>
+              <td style="width:70px; max-width:100px; padding-right:15px; font-weight: bold;"><%= number_with_delimiter(@top_performers[w]["total_points"]) %> points</td>
+              <td style="width:100px; max-width: 100px; padding-right:15px;">Date: <%= @top_performers[w]["created_at"].to_date.strftime("%m/%d/%y") %></td>
+              <td style="width:85px"><a class="view" href='/results/post/<%= @top_performers[w]["post_id"].to_s %>/user/<%= @top_performers[w]["user_id"].to_s %>?back_to=index&start_date=<%= @contest.start_date %>&end_date=<%= @contest.end_date%>'>View Result</a></td>
+            </tr>
+          </table>
+        <% else %>
+          <p>No one has completed a <a class="workout-link" href="<%= '/current/' + w.to_s %>"><%= w %>-minute workout</a>...yet.</p>
+        <% end %> 
+        </div>
+    </div>
+  <% end %>
+</div>

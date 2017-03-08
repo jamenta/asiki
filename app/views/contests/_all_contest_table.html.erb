@@ -1,0 +1,31 @@
+<table class="all-contests-table" style="margin-top: 30px;">
+ <tr class="top-row">
+  <th></th>
+  <th>Name</th>
+  <th>Status</th>
+  <th>Start Date</th>
+  <th>End Date</th>
+  <th></th>
+ </tr>
+
+ <% @contests.each do |c| %>
+  <tr>
+   <td style="min-width: 90px; padding-top:5px; padding-left: 5px;"><%= emojify c["emoji_title"], img_attrs: { title: nil}, class_name: "emoji-contests-table" %></td>
+   <td style="width: 150px; padding-right: 10px;"><%= c["contest_name"] %></td>
+   <td style="width: 130px;">
+    <% if c["status"] == 1 %>
+     Active
+    <% elsif c["status"] == 2 %>
+     Future
+    <% else %>
+     Completed
+    <% end %>
+   </td>
+   <td style="width: 150px; min-width: 100px;"><%= c["start_date"] %></td>
+   <td style="width: 150px; min-width: 100px;"><%= c["end_date"] %></td>
+   <td style="min-width: 115px;"><a href="/contests/<%= c["id"] %>">View Contest</a></td>
+  </tr>
+
+ <% end %>
+
+</table>

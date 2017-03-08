@@ -1,0 +1,36 @@
+<div id="edit-results-form">
+  <%= form_for(@post, method: 'patch', url: url_for(controller: 'posts', action: 'update', post_id: @post.id)) do |f| %>
+    <%= f.fields_for :results_attributes do |attr| %>
+      <% if @workout.rounds == true %>
+        <% @results.each do |r| %>
+          <% if r.exercise_description == "Total rounds" %>
+            <div class="edit-container">
+              <%= attr.label "Total rounds:", class: "rep-input" %>
+              <%= attr.number_field r.id, min: 0, value: r.reps.to_i, class: "rep-input" %>
+            </div>
+          <% end %>
+        <% end %>
+        <% @results.each do |r| %>
+          <% if r.exercise_description != "Total rounds" %>
+            <div class="edit-container">
+              <%= attr.label r.exercise_description + ' (extra reps):', class: "rep-input" %>
+              <%= attr.number_field r.id, min: 0, value: r.reps.to_i, class: "rep-input" %>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% @results.each do |r| %>
+          <div class="edit-container">
+            <%= attr.label r.exercise_description + ' reps:', class: "rep-input" %>
+            <%= attr.number_field r.id, min: 0, value: r.reps.to_i, class: "rep-input" %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <div class="edit-text-container">
+      <%= f.label :comment %><br>
+      <%= f.text_area :comment, size: '35x3' %>
+    </div>
+    <%= f.submit "Save changes", id: 'editResults' %>
+  <% end %>
+</div>

@@ -1,0 +1,2 @@
+<%= link_to raw('<i class="fa fa-user-plus" aria-hidden="true"></i> Add friend'), "/friends/#{@user_id}", remote: true, method: 'post', title:'Request to add this user as a friend', id: 'add-friend-btn' %>
+<div id="friend-message-display"></div>

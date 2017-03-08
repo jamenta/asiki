@@ -1,0 +1,80 @@
+<% if current_user.id == @user.id %>
+  <%= render partial: "friend_invite_form" %>
+  <div class="qf-header"><h1 style="padding: 20px 0 20px 0; font-weight: normal;">My Fitness Friends</h1></div>
+<% else %>
+  <div class="qf-header"><h1 style="padding: 20px 0 20px 0; font-weight: normal;"><%= @user.first_name + ' ' + @user.last_name[0,1] + '.' %>'s Fitness Friends</h1></div>
+<% end %>
+
+<div id="friends-container" >
+  <% if @requests.length > 0 %>
+	  <% @requests.each do |req| %>
+	    <div class="friend" id="user_<%= req.friend_id %>">
+		  <div class="user-image"><%= user_image_by_id(req.friend_id, 80) %></div>
+		  <div class="friend-info">
+	        <a class="name" data-turbolinks="false" href="/profile?user=<%= req.friend_id %>"><%= req.first_name + " " + req.last_name %></a>
+			<p><%= req.state %></p>
+		    <p><%= pluralize(req.workouts,"workout") %> completed</p>
+		  </div>
+	      <div class="request-buttons">
+		    <p>Friend request pending</p>
+		    <%= link_to raw('<div class="icon"><i class="fa fa-check" aria-hidden="true"></i></div>Accept'), "/friends/accept/#{req.id}", remote: true, method: 'patch', id: 'accept-friend' %>
+		    <%= link_to raw('<div class="icon"><i class="fa fa-times" aria-hidden="true"></i></div>Decline'), "/friends/decline/#{req.id}", remote: true, method: 'patch', id: 'decline-friend', data: { confirm: "Are you sure you want to decline this friend request?" } %>
+		  </div>
+		</div>
+	  <% end %>
+  <% end %>
+  <% if @friends.length > 0 %>
+	  <% @friends.each do |friend| %>
+	    <div class="friend" id="user_<%= friend.friend_id %>">
+		  <div class="user-image"><%= user_image_by_id(friend.friend_id, 80) %></div>
+		  <div class="friend-info">
+	        <a class="name" data-turbolinks="false" href="/profile?user=<%= friend.friend_id %>"><%= friend.first_name + " " + friend.last_name %></a>
+			<p><%= friend.state %></p>
+			<p><%= pluralize(friend.workouts,"workout") %> completed</p>
+		  </div>
+
+		  <% if current_user.id == @user.id %>
+			  <div class="friend-options">
+				<a class="friend-btn"><i class="fa fa-check" aria-hidden="true"></i> Friends</a>
+				<div class="dropdown">
+				  <div class="arrow-up"></div>
+				  <div class="dropdown-content">
+					<%= link_to raw('<div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>Send message'), "/messages/#{@user.id}", remote: true %>
+					<%= link_to raw('<div class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></div>Remove friend'), "/friends/#{friend.id}", remote: true, method: 'delete', data: { confirm: "Are you sure you want to remove this friend?" } %>
+				  </div>
+				</div>
+			  </div>
+		  <% else %>
+		    <% if current_user.id != friend.friend_id %>
+			  <% if @currentFriends[friend.friend_id] %>
+				  <% if @currentFriends[friend.friend_id][:status] == "accepted" %>
+					  <div class="friend-options">
+						<a class="friend-btn"><i class="fa fa-check" aria-hidden="true"></i> Friends</a>
+						<div class="dropdown">
+						  <div class="arrow-up"></div>
+						  <div class="dropdown-content">
+							<%= link_to raw('<div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>Send message'), "/messages/#{@user.id}", remote: true %>
+							<%= link_to raw('<div class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></div>Remove friend'), "/friends/#{friend.id}", remote: true, method: 'delete', data: { confirm: "Are you sure you want to remove this friend?" } %>
+						  </div>
+						</div>
+					  </div>
+				  <% elsif @currentFriends[friend.friend_id][:status] == "pending" %>
+					  <div class="friend-options">
+						<a href="/friends" id="request-pending">Friend request pending...</a>
+					  </div>
+				  <% elsif @currentFriends[friend.friend_id][:status] == "requested" %>
+					  <div class="friend-options">
+						<a id="request-pending">Friend request pending...</a>
+					  </div>
+				  <% end %>
+			  <% end %>
+		    <% end %>
+		  <% end %>
+		</div>
+	  <% end %>
+  <% end %>
+</div>
+
+<% if current_user.id == @user.id %>
+  <a id="invite-friends" >Invite more friends to join Asiki!</a>
+<% end %>

@@ -1,0 +1,12 @@
+<div class="qf-header">
+<h1>My Contests</h1>
+</div>
+
+<% if @contests == nil %>
+  <h2 style="padding-top: 20px; font-weight: normal;">You do not have any active or upcoming contests.</h2>
+<% elsif @contests.ntuples == 0 %>
+  <h2 style="padding-top: 20px; font-weight: normal;">You do not have any active or upcoming contests.</h2>
+<% else %>
+  <%= render partial: "all_contest_table" %>
+<% end %>
+<a href="/contests/new" id="create-contest">Create a new contest</a>

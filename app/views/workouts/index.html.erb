@@ -1,0 +1,26 @@
+<div class="qf-header">
+<h1 style="border:none;">All Asiki Workouts</h1>
+</div>
+
+<table class="all-workouts-table">
+ <tr class="top-row">
+  <th></th>
+  <th>Description</th>
+  <th>Duration</th>
+  <th>Start date</th>
+  <th>End date</th>
+  <th></th>
+ </tr>
+ <% @workouts.each do |workout| %>
+  <tr>
+   <td style="width: 140px; padding: 10px 0px 5px 30px;"><%= image_tag workout.image_url, size: '100x100', style: "border-radius:5px;", title: workout.short_description %></td>
+   <td style="width: 200px;"><%= workout.short_description %></td>
+   <td style="width: 150px;"><%= pluralize(workout.workout_length, 'minute') %></td>
+   <td style="width: 130px;"><%= workout.start_date.strftime("%m/%d/%y") %></td>
+   <td style="width: 130px;"><%= workout.end_date.strftime("%m/%d/%y") %></td>
+   <td style="width: 150px; min-width: 120px; padding-right: 0px;"><a href="/workouts/<%= workout.id %>" class="view-table-button">View Workout</a></td>
+  <tr>
+ <% end %>
+</table>
+
+<%= render partial: "workout_pagination" %>

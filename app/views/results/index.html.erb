@@ -1,0 +1,9 @@
+<% if current_user %>
+  <%= render partial: "index_results_page" %>
+  <% if current_user.id.to_i == @user_id.to_i %>
+    <a href="/results/<%= current_user.id %>/all">View All Results</a>
+  <% end %>
+<% else %>
+  <h2>Oops! You must be logged in to view this page.</h2>
+  <a href="/login">Log in</a>
+<% end %>

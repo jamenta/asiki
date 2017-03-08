@@ -1,0 +1,24 @@
+<table class="show-results-table" style="margin-top: 30px;">
+  <tr class="top-row">
+    <th style="padding-left: 15px;">Date Completed</th>
+    <th>Workout Description</th>
+    <th>Duration</th>
+    <th>Total Points</th>
+    <th></th>
+  </tr>
+  <% @workouts.each do |workout| %>
+    <tr>
+      <td style="width: 150px; padding-left: 15px;"><%=  workout.create_date.strftime('%m-%d-%Y') %></td>
+      <td style="width: 250px;"><%= workout.short_description %></td>
+      <td style="width: 150px;"><%= pluralize(workout.workout_length, 'minute') %></td>
+      <td style="width: 110px;"><%= workout.total_points %></td>
+      <% if @back_to == "index" %>
+        <td style="width: 120px; min-width:120px"><a class="view-table-button" href="/results/post/<%= workout.post_id %>/user/<%= workout.user_id %>?back_to=index&start_date=<%= @start_date %>&end_date=<%= @end_date %>">View Result</a></td>
+      <% else %>
+        <td style="width: 120px; min-width:120px"><a class="view-table-button" href="/results/post/<%= workout.post_id %>/user/<%= workout.user_id %>?back_to=<%= @back_to %>">View Result</a></td>
+      <% end %>
+
+    </tr>
+  <% end %>
+</table>
+

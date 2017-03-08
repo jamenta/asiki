@@ -1,0 +1,6 @@
+<% if current_user %>
+  <%= render partial: "all_results_page" %>
+<% else %>
+  <h2>Oops! You must be logged in to view this page.</h2>
+  <p><%= link_to "Log in", '/login' %></p>
+<% end %>

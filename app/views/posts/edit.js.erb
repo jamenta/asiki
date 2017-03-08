@@ -1,0 +1,22 @@
+$('div#edit-results-form').remove();
+$('a#cancel-edit').remove();
+$('a#edit').hide();
+$('a#delete').hide();
+$('#individual-results').hide();
+$('p#option-buttons').append('<a id="cancel-edit" title="Cancel edits"><i class="fa fa-close" aria-hidden="true"></i></a>');
+$('a#cancel-edit').click(function() {
+    $(this).remove();
+    $('#edit-results-form').remove();
+    $('a#edit').show();
+    $('a#delete').show();
+    $('#individual-results').show();
+    $('a#edit').attr("disabled", false);
+});
+
+$('#results-display-section').append("<%= j render("edit_results_form") %>");
+$("#editResults").click(function() {
+    $("form.edit_result").each(function() {
+      $(this).submit();
+    });
+});
+

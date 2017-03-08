@@ -1,0 +1,362 @@
+.contest-header {
+ margin-bottom: 20px;
+ padding-top: 30px;
+ padding-bottom: 20px;
+ margin-left: 10%;
+ margin-right: 10%;
+
+}
+.contest-header h1{
+ font-weight: normal;
+ font-size: 32px;
+ margin: auto;
+ padding-bottom: 5px;
+ border-bottom: 1px solid #FFFFFF;
+}
+
+.contest-header i#contest-menu-icon {
+ font-size: 32px;
+ position: absolute;
+ left: 10%;
+ cursor: pointer;
+ padding-right: 10px;
+}
+
+.contest-header i#contest-menu-icon:hover {
+ color: #d6e0ef;
+}
+
+#contest-menu {
+  background-color: #33343a;
+  color: #FFFFFF;
+  border: 1px solid #B6B6B6;
+  border-top: none;
+  border-radius: 2px;
+  width: 400px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -402px;
+  text-align: left;
+  z-index: 999;
+  overflow-y: hidden;
+  box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.2);
+
+}
+
+#contest-menu h4 {
+ text-align: center;
+ padding: 5px 5px 20px 5px;
+}
+
+#contest-menu .contest-menu-header {
+  border-bottom: 1px solid #B6B6B6;
+}
+
+#contest-menu .contest-menu-header p{
+  display: inline-block;
+  font-size: 12px;
+  vertical-align: top;
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+#contest-menu .contest-menu-header p#total-contestants{
+ float:right;
+ padding-right: 5px;
+}
+
+#contest-menu a.contest-menu-item {
+ display: block;
+ padding: 25px 25px 25px 15px;
+ border-bottom: 1px solid #B6B6B6;
+ color: #FFFFFF;
+ text-decoration: none;
+ cursor: pointer;
+ font-size: 18px;
+ background-color: #33343a;
+}
+
+#contest-menu a.contest-menu-item div.menu-item {
+ display:inline-block;
+ width: 30px;
+ text-align: left;
+}
+
+#contest-menu a.contest-menu-item:hover {
+background-color: #696969;
+}
+
+#contest-menu a#add-invitations:hover i {
+  color: #4de66c;
+}
+#contest-menu a#contest-settings:hover i {
+  color: #ffbe26;
+}
+#contest-menu a#contest-info:hover i {
+  color: #6ffffa;
+}
+
+.contest-container{
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.contest-leaderboard{
+  height: 812px;
+  width: 550px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: top;
+  //overflow: scroll;
+  margin-bottom: 4px;
+}
+
+.contest-leaderboard h2, .top-four h2, .contest-comments-section h2 {
+  color:black;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 15px;
+  padding-top: 10px;
+  font-weight: normal;
+}
+
+.top-four h2 {
+  padding-bottom: 7px;
+}
+
+.best-performer h3 {
+  color:black;
+  margin-left: 25%;
+  margin-right: 25%;
+  font-weight: normal;
+  padding-top: 1px;
+}
+
+.best-performer {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  height: 63px;
+}
+
+.best-performer:hover {
+background-color: #F9F9F9;
+}
+
+table.performer-table  {
+ width: 540px;
+ margin: auto;
+ text-align: left;
+ margin-top: 5px;
+}
+
+table.performer-table td {
+color: #000000;
+}
+
+.performer-container p {
+ color: #000000;
+ padding-top: 10px;
+}
+
+.best-performer a.view {
+ background-color: rgb(19, 58, 117);
+ color: white;
+ font-size: 14px;
+ text-decoration: none;
+ padding:5px;
+ border-radius: 5px;
+}
+
+.best-performer a.view:hover { 
+ background-color: rgb(117, 161, 164); 
+}
+
+.contest-section-right{
+  height: 100%;
+  width: 550px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.contest-section-right .top-four{
+  height: 398px;
+  width: 550px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  //margin-bottom: 2px;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0;
+}
+
+.contest-section-right .contest-comments-section{
+  height: 410px;
+  width: 550px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.contestant-listing p {
+  color: black;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5px 10px 5px 10px;
+}
+
+.all-contests {
+ background-color: #FFFFFF;
+ color: black;
+ border-radius: 5px;
+ margin: auto;
+ margin-top: 20px;
+ width: 1000px;
+ height: 400px;
+ }
+
+.all-contests a {
+ padding: 5px;
+ background-color: rgb(117, 161, 164);
+ height: 50px;
+ width: 100px;
+ text-decoration: none;
+}
+
+a#create-contest {
+ display: inline-block;
+ color: #FFFFFF;
+ background-color: rgb(117, 161, 164);
+ border: 1px solid #FFFFFF;
+ border-radius: 5px;
+ cursor: pointer;
+ padding: 15px 40px 15px 40px;
+ transition: all .4s;
+ text-decoration: none;
+ margin: auto;
+ font-size: 16px;
+ margin-top: 20px;
+}
+
+a#create-contest:hover{
+ background-color: rgb(19, 58, 117);
+}
+
+.all-contests table.all-contest-table {
+ display: inline-block;
+}
+
+p a.workout-link, table.performer-table td a.contest-user-link, table.contest-table a.user-link {
+  color: #000000;
+  text-decoration: none;
+}
+
+p a.workout-link:hover, table.performer-table td a.contest-user-link:hover, table.contest-table a.user-link:hover {
+  color: rgb(19, 58, 117);
+}
+
+table.contest-table tr.current-user-row a.user-link {
+  font-weight: bold;
+}
+
+.accept-invite p, .rejoin-contest p {
+  font-size: 18px;
+  padding: 20px;
+}
+
+.accept-invite form {
+  display: inline-block;
+}
+
+.accept-invite form input#accept, .accept-invite form input#decline, .rejoin-contest form input#join{
+  height: 80px;
+  width: 300px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: all .4s;
+}
+
+.accept-invite form input#accept, .rejoin-contest form input#join {
+  border-radius: 5px;
+  color: #FFFFFF;
+  background-color: #3EBD4F;
+  border: 1px solid #FFFFFF;
+}
+.accept-invite form input#accept:hover, .rejoin-contest form input#join:hover {
+  background-color: #45EA5B;
+}
+
+.accept-invite form input#decline {
+  border-radius: 5px;
+  color: #FFFFFF;
+  background-color: #4C534F;
+  border: 1px solid #FFFFFF;
+}
+.accept-invite form input#decline:hover {
+  background-color: #646464;
+}
+
+a.delete-contest-btn, a.leave-contest-btn {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 18px;
+  transition: color .4s;
+  position: relative;
+  margin-top: 10px;
+}
+
+a.delete-contest-btn:hover, a.leave-contest-btn:hover {
+  color:#FE4E4E;
+}
+
+@media only screen and (max-width: 400px) {
+    #contest-menu-icon {
+        display: none;
+    }
+}
+
+#contest-menu a#hide-menu {
+ position: absolute;
+ color: #FFFFFF;
+ right: 7px;
+ top: 3px;
+ cursor: pointer;
+ font-weight: bold;
+ font-size: 14px;
+}
+
+#contest-menu a#hide-menu:hover {
+ color:#FE4E4E;
+}
+
+#contest-menu div#contestant-list {
+  width: 100%;
+  height: 100%;
+  background-color: #444650;
+}
+
+#contest-menu div#contestant-list p {
+  color: #FFFFFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-decoration: underline;
+  font-size: 18px;
+  text-align: center;
+}
+
+#contest-menu div#contestant-list a.contestant-listing {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+a.contestant-listing:hover {
+ background-color: #696969;
+}
+
+
+  

@@ -1,0 +1,12 @@
+<% if @success_bool %>
+  $('div#message-inputs').replaceWith('<div id="message-sent"><p>Message sent!</p></div>');
+  setTimeout(function() {
+    $("div#outer-message").fadeOut("fast");
+    }, 1500);
+<% else %>
+  $('div#message-inputs').replaceWith('<div id="message-send-error"><p>Message could not be sent. Please try again later.</p></div>');
+  $('div#send-message-wrapper').prepend('<div id="message-inputs"><a id="close">Close</a></div>');
+  $('a#close').click(function(){
+    $('div#outer-message').remove();
+	});
+<% end %>

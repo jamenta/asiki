@@ -1,0 +1,182 @@
+// Place all the styles related to the Workouts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Place all the styles related to the Workouts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.workouts{
+background-color: #4C534F;
+}
+
+.workout-header{
+font-size: 42px;
+margin:0 auto;
+margin-left: 20%;
+margin-right: 20%;
+padding-top: 20px;
+padding-bottom: 20px;
+border-bottom: 1px solid white;
+font-weight: lighter;
+}
+
+.workouts div.workout-pair{
+  display: inline-block;
+}
+
+.image-wrapper {
+  width:275px;
+  height:400px;
+  overflow:hidden;
+  border: 1px solid grey;
+}
+
+.workout-wrapper {
+  color: black;
+  display: inline-block;
+  margin: 25px auto;
+  padding: 2px;
+  border-radius: 5px;
+  padding-bottom: 1px;
+  background-color: white;
+}
+
+.workout-image {
+  width:275px;
+  height:400px;
+  background-position: center center;
+  transform: scale(1);
+  transition: transform .4s;
+}
+
+.workout-wrapper:hover .workout-image {
+  transform: scale(1.2);
+}
+
+.workout-wrapper .view-workout-btn{
+  text-decoration: none;
+  font-size: 18px;
+  background-color: rgb(117, 161, 164);
+  color: white;
+  display: inline-block;
+  border: 1px solid rgb(117, 161, 164);
+  padding: 10px;
+  margin-top: 2px;
+  margin-bottom: 1px;
+  width: 253px;
+  height: 20px;
+  transition: all .4s;
+  border-radius: 5px;
+}
+
+.workout-wrapper .workout-length{
+  font-size: 20px;
+  font-weight: bold;
+}
+.workout-wrapper .workout-description{
+  font-size: 14px;
+}
+.view-workout-btn:hover {
+  color: #FFFFFF;
+  background-color: rgb(19, 58, 117);
+  border: 1px solid rgb(19, 58, 117);
+}
+
+.all-workouts-btn{
+  text-decoration: none;
+  font-size: 22px;
+  background-color: rgb(117, 161, 164);
+  color: white;
+  display: inline-block;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 20px;
+  line-height: 30px;
+  width: 500px;
+  height: 30px;
+  transition: all .4s;
+  margin: 10px 50px 30px 50px;
+}
+
+.all-workouts-btn:hover{
+  color: #FFFFFF;
+  background-color: rgb(19, 58, 117);
+}
+
+.exercises-container{
+margin-top: 10px;
+margin-bottom: 20px;
+}
+
+.post-results-btn {
+  display: inline-block;
+  cursor: pointer;
+  background-color: rgb(117, 161, 164);
+  color: white;
+  display: inline-block;
+  border: 2px solid white;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  width: 250px;
+  height: 20px;
+  transition: all 0.4s;
+  margin: 0 auto;
+  margin-right: 20%;
+  margin-left: 20%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.post-results-btn span {
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+
+.post-results-btn span:after {
+  content: '\25BC';
+  content-size: 40px;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.4s;
+}
+
+.post-results-btn:hover span {
+  padding-right: 25px;
+}
+
+.post-results-btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.post-results-btn:hover {
+    background-color: rgb(19, 58, 117);
+}
+
+.all-workout-button {
+  display: inline-block;
+  background-color: rgb(117, 161, 164);
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  vertical-align: center;
+  font-size: 16px;
+  padding: 14px;
+  width: 150px;
+  height: 12px;
+  transition: all 0.4s;
+  margin:0 auto;
+}
+
+.all-workout-button:hover {
+    background-color: rgb(19, 58, 117);
+}
+
+

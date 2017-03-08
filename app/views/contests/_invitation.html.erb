@@ -1,0 +1,5 @@
+<%= form_for(Contestant.new, remote: true, :method => :post, url: "/contests/#{@contest.id}/contestants") do |f| %>
+  <%= f.label :email, "Email:" %>
+  <%= f.email_field :email, placeholder: "someone@domain.com" %>
+  <%= f.submit "Invite", id: "add-invite-btn" %>
+<% end %>

@@ -1,0 +1,14 @@
+<div id="outer-message">
+<div id="send-message-wrapper">
+  <div id="message-inputs">
+    <a id="close">Cancel</a>
+	<div id="user-image"><%= user_image_by_id(@user.id, 40) %></div>
+    <h1> Send a message to <%= @user.first_name %> </h1>
+    <%= form_for(Message.new, remote: true, url: url_for(controller: 'messages', action: 'create', user_id: @user.id )) do |f| %>
+      <%= f.text_area :message, size: '50x12', placeholder: "Send a message...", id:"message-value" %><br>
+	  <div id="message-alerts"><p id="count">180 </p><p> characters remaining</p></div>
+      <%= f.submit "Send", id: "send-message-btn" %>
+    <% end %>
+  </div>
+</div>
+</div>

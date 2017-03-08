@@ -1,0 +1,13 @@
+<% if @success_bool %>
+  $('a#add-friend-btn').replaceWith('<a id="request-pending">Friend request pending...</a>');
+  $('div#friend-message-display').append('<p id="good-message">Friend request sent!</p>');
+  setTimeout(function() {
+    $("p#good-message").fadeOut("slow");
+  }, 1000);
+<% else %>
+  $('div#friend-message-display').append('<p id="bad-message">Error sending request. Please try again later.</p>');
+  setTimeout(function() {
+    $("p#bad-message").fadeOut("slow");
+  }, 2500);
+<% end %>
+  

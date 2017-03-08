@@ -1,0 +1,356 @@
+<% if current_user %>
+<% if @user != nil %>
+<% content_for :profile_charts do %>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart']});
+
+      google.charts.setOnLoadCallback(init);
+
+      function init() {
+        var initOptions = {width:1050,
+                       height:400,
+                       animation: {
+                         duration: 1000, 
+                         easing: 'out', 
+                         'startup': true},
+                       chartArea: {'width': '75%', 'height': '80%', 'top': '2%'} 
+                      };      
+        var pointsButton = document.getElementById('points-btn');
+        var minutesButton = document.getElementById('minutes-btn');
+        var thisWeekButton = document.getElementById('this-week-btn');
+        var thirtyButton = document.getElementById('past-30-btn');
+        var sixtyButton = document.getElementById('past-60-btn');
+        var allButton = document.getElementById('all-btn');
+        var timeVal = "week";
+        var displayVal = "minutes";
+        var useMonths = "<%= @use_months %>";
+        
+        var minuteWeek = new google.visualization.DataTable();
+            minuteWeek.addColumn('string', 'Day');
+            minuteWeek.addColumn('number', 'Minutes')
+            <% @minuteWeek.each do |x| %>
+              minuteWeek.addRow(["<%= x["given_date"] %>", <%= x["total"].to_i %>]);
+            <% end %>
+        var minute30 = new google.visualization.DataTable();
+            minute30.addColumn('date', 'Date');
+            minute30.addColumn('number', 'Minutes');
+            <% @minute30.each do |x| %>
+               minute30.addRow([new Date("<%= x["given_date"].to_date %> 00:00:00"), <%= x["total"].to_i %>]);
+            <% end %>
+        var minute60 = new google.visualization.DataTable();
+            minute60.addColumn('date', 'Date');
+            minute60.addColumn('number', 'Minutes');
+            <% @minute60.each do |x| %>
+               minute60.addRow([new Date("<%= x["given_date"].to_date %> 00:00:00"), <%= x["total"].to_i %>]);
+            <% end %>
+        var minuteAll = new google.visualization.DataTable();
+            <% if @use_months %>
+              minuteAll.addColumn('string', 'Month');
+              minuteAll.addColumn('number', 'Minutes');
+              <% @minuteAll.each do |x| %>
+                 minuteAll.addRow(["<%= (x["given_date"] + "-01").to_date.strftime('%b-%y') %>", <%= x["total"].to_i %>]);
+              <% end %>
+            <% else %>
+              <% if @minuteAll.ntuples > 1 %>
+                minuteAll.addColumn('date', 'Date');
+                minuteAll.addColumn('number', 'Minutes');
+                <% @minuteAll.each do |x| %>
+                   minuteAll.addRow([new Date("<%= x["given_date"].to_date %> 00:00:00"), <%= x["total"].to_i %>]);
+                <% end %>
+              <% else %>
+                minuteAll.addColumn('string', 'Date');
+                minuteAll.addColumn('number', 'Minutes');
+                <% @minuteAll.each do |x| %>
+                   minuteAll.addRow(["<%= x["given_date"].to_date.strftime('%b-%d-%Y') %>", <%= x["total"].to_i %>]);
+                <% end %>
+              <% end %>
+            <% end %>
+        var pointWeek = new google.visualization.DataTable();
+            pointWeek.addColumn('string', 'Day');
+            pointWeek.addColumn('number', 'Points');
+            <% @pointWeek.each do |x| %>
+              pointWeek.addRow(["<%= x["given_date"] %>", <%= x["total"].to_i %>]);
+            <% end %>
+        var point30 = new google.visualization.DataTable();
+            point30.addColumn('date', 'Date');
+            point30.addColumn('number', 'Points');
+            <% @point30.each do |x| %>
+               point30.addRow([new Date("<%= x["given_date"].to_date %> 00:00:00"), <%= x["total"].to_i %>]);
+            <% end %>
+        var point60 = new google.visualization.DataTable();
+            point60.addColumn('date', 'Date');
+            point60.addColumn('number', 'Points');
+            <% @point60.each do |x| %>
+               point60.addRow([new Date("<%= x["given_date"].to_date %> 00:00:00"), <%= x["total"].to_i %>]);
+            <% end %>
+        var pointAll = new google.visualization.DataTable();
+            <% if @use_months %>
+              pointAll.addColumn('string', 'Month');
+              pointAll.addColumn('number', 'Points');
+              <% @pointAll.each do |x| %>
+                 pointAll.addRow(["<%= (x["given_date"] + "-01").to_date.strftime('%b-%y') %>", <%= x["total"].to_i %>]);
+              <% end %>
+            <% else %>
+              <% if @pointAll.ntuples > 1 %>
+                pointAll.addColumn('date', 'Date');
+                pointAll.addColumn('number', 'Points');
+                <% @pointAll.each do |x| %>
+                   pointAll.addRow([new Date("<%= x["given_date"].to_date %> 00:00:00"), <%= x["total"].to_i %>]);
+                <% end %>
+              <% else %>
+                pointAll.addColumn('string', 'Date');
+                pointAll.addColumn('number', 'Points');
+                <% @pointAll.each do |x| %>
+                   pointAll.addRow(["<%= x["given_date"].to_date.strftime('%b-%d-%Y') %>", <%= x["total"].to_i %>]);
+                <% end %>
+              <% end %>
+            <% end %>
+
+        var minuteWeekSum = "<%= number_with_delimiter(@minuteWeekSum) %>";
+        var minute30Sum = "<%= number_with_delimiter(@minute30Sum) %>";
+        var minute60Sum = "<%= number_with_delimiter(@minute60Sum) %>";
+        var minuteAllSum = "<%= number_with_delimiter(@minuteAllSum) %>";
+        var pointWeekSum = "<%= number_with_delimiter(@pointWeekSum) %>";
+        var point30Sum = "<%= number_with_delimiter(@point30Sum) %>";
+        var point60Sum = "<%= number_with_delimiter(@point60Sum) %>";
+        var pointAllSum = "<%= number_with_delimiter(@pointAllSum) %>";
+        
+        function drawChart(chartData, chartOptions) {
+          var chart = new google.visualization.ColumnChart(document.getElementById('profile-chart'));
+          chart.draw(chartData, chartOptions);
+        }
+        
+       function getOptions(display, time) {
+          returnOptions = initOptions;
+          if (display === "minutes") {
+            returnOptions.colors = ['rgb(19, 58, 117)'];
+            returnOptions.vAxis = {title: "Minutes", minValue: 0, viewWindowMode: "explicit",viewWindow:{ min: 0 }};
+          }
+          else if (display === "points") {
+            returnOptions.colors = ['#5B92BC'];
+            returnOptions.vAxis = {title: "Points", minValue: 0, viewWindowMode: "explicit", viewWindow:{ min: 0 }};
+          }
+          if (time === "week") {
+            returnOptions.hAxis = {title: "Day of Week"};
+          }
+          else {
+            returnOptions.hAxis = {title: "Date"};
+          }    
+          return returnOptions;
+        }
+        function getData(display, time) {
+          if (display === "minutes") {
+            if (time === "week") {
+              returnData = minuteWeek;
+            }
+            else if (time === "30") {
+              returnData = minute30;
+            }
+            else if (time === "60") {
+              returnData = minute60;
+            }
+            else if (time === "all") {
+              returnData = minuteAll;
+            }
+          }
+          else if (display === "points") {
+            if (time === "week") {
+              returnData = pointWeek;
+            }
+            else if (time === "30") {
+              returnData = point30;
+            }
+            else if (time === "60") {
+              returnData = point60;
+            }
+            else if (time === "all") {
+              returnData = pointAll;
+            }
+          }
+          return returnData;
+        }
+        function getMoreData(display, time) {
+          if (display === "minutes") {
+            if (time === "week") {
+              returnSum = minuteWeekSum;
+              returnLink = "/results?user=<%= @user.id %>&start_date=<%= Date.today - 6 %>&end_date=<%= Date.today %>";
+            }
+            else if (time === "30") {
+              returnSum = minute30Sum;
+              returnLink = "/results?user=<%= @user.id %>&start_date=<%= Date.today - 29 %>&end_date=<%= Date.today %>";
+            }
+            else if (time === "60") {
+              returnSum = minute60Sum;
+              returnLink = "/results?user=<%= @user.id %>&start_date=<%= Date.today - 59 %>&end_date=<%= Date.today %>";
+            }
+            else if (time === "all") {
+              returnSum = minuteAllSum;
+              returnLink = "/results/all?user=<%= @user.id %>";
+            }
+          }
+          else if (display === "points") {
+            if (time === "week") {
+              returnSum = pointWeekSum;
+              returnLink = "/results?user=<%= @user.id %>&start_date=<%= Date.today - 6 %>&end_date=<%= Date.today %>";
+            }
+            else if (time === "30") {
+              returnSum = point30Sum;
+              returnLink = "/results?user=<%= @user.id %>&start_date=<%= Date.today - 29%>&end_date=<%= Date.today %>";
+            }
+            else if (time === "60") {
+              returnSum = point60Sum;
+              returnLink = "/results?user=<%= @user.id %>&start_date=<%= Date.today - 59 %>&end_date=<%= Date.today %>";
+            }
+            else if (time === "all") {
+              returnSum = pointAllSum;
+              returnLink = "/results/all?user=<%= @user.id %>";
+            }
+          }
+          return [returnSum.toString(), returnLink];
+        }
+
+       pointsButton.onclick = function() {
+         displayVal = "points"
+         sumVal = getMoreData(displayVal, timeVal)[0];
+         resultsLink = getMoreData(displayVal, timeVal)[1];
+         drawChart(getData(displayVal, timeVal), getOptions(displayVal, timeVal));
+       $('div#profile-chart').prepend('<div id="results-link"><a href=' + resultsLink + '>View Results</a><p>Total ' + displayVal + ': ' + sumVal + '</p></div>');
+         $('button#points-btn').addClass('points-button-active');
+         $('button#minutes-btn').removeClass('minutes-button-active');
+       }
+       minutesButton.onclick = function() {
+         displayVal = "minutes"
+         sumVal = getMoreData(displayVal, timeVal)[0];
+         resultsLink = getMoreData(displayVal, timeVal)[1];
+         drawChart(getData(displayVal, timeVal), getOptions(displayVal, timeVal));
+       $('div#profile-chart').prepend('<div id="results-link"><a href=' + resultsLink + '>View Results</a><p>Total ' + displayVal + ': ' + sumVal + '</p></div>');
+         $('button#points-btn').removeClass('points-button-active');
+         $('button#minutes-btn').addClass('minutes-button-active');
+       }
+       thisWeekButton.onclick = function() {
+         timeVal = "week"
+         sumVal = getMoreData(displayVal, timeVal)[0];
+         resultsLink = getMoreData(displayVal, timeVal)[1];
+         drawChart(getData(displayVal, timeVal), getOptions(displayVal, timeVal));
+       $('div#profile-chart').prepend('<div id="results-link"><a href=' + resultsLink + '>View Results</a><p>Total ' + displayVal + ': ' + sumVal + '</p></div>');
+         $('.time-btn').removeClass('time-button-active');
+         $('button#this-week-btn').addClass('time-button-active');
+       }
+       thirtyButton.onclick = function() {
+         timeVal = "30"
+         sumVal = getMoreData(displayVal, timeVal)[0];
+         resultsLink = getMoreData(displayVal, timeVal)[1];
+         drawChart(getData(displayVal, timeVal), getOptions(displayVal, timeVal));
+       $('div#profile-chart').prepend('<div id="results-link"><a href=' + resultsLink + '>View Results</a><p>Total ' + displayVal + ': ' + sumVal + '</p></div>');
+         $('.time-btn').removeClass('time-button-active');
+         $('button#past-30-btn').addClass('time-button-active');
+       }
+       sixtyButton.onclick = function() {
+         timeVal = "60"
+         sumVal = getMoreData(displayVal, timeVal)[0];
+         resultsLink = getMoreData(displayVal, timeVal)[1];
+         drawChart(getData(displayVal, timeVal), getOptions(displayVal, timeVal));
+       $('div#profile-chart').prepend('<div id="results-link"><a href=' + resultsLink + '>View Results</a><p>Total ' + displayVal + ': ' + sumVal + '</p></div>');
+         $('.time-btn').removeClass('time-button-active');
+         $('button#past-60-btn').addClass('time-button-active');
+       }
+       allButton.onclick = function() {
+         timeVal = "all"
+         sumVal = getMoreData(displayVal, timeVal)[0];
+         resultsLink = getMoreData(displayVal, timeVal)[1];
+         drawChart(getData(displayVal, timeVal), getOptions(displayVal, timeVal));
+       $('div#profile-chart').prepend('<div id="results-link"><a href=' + resultsLink + '>View Results</a><p>Total ' + displayVal + ': ' + sumVal + '</p></div>');
+         $('.time-btn').removeClass('time-button-active');
+         $('button#all-btn').addClass('time-button-active');
+       }
+       
+       sumVal = getMoreData(displayVal, timeVal)[0];
+       resultsLink = getMoreData(displayVal, timeVal)[1];
+       drawChart(getData(displayVal, timeVal), getOptions(displayVal, timeVal));
+       $('div#profile-chart').prepend('<div id="results-link"><a href=' + resultsLink + '>View Results</a><p>Total ' + displayVal + ': ' + sumVal + '</p></div>');
+       $('button#minutes-btn').addClass('minutes-button-active');
+       $('button#this-week-btn').addClass('time-button-active');
+      }
+
+    </script>
+<% end %>
+
+  <div class="profile-header">
+    <div class="profile-image"><%= user_image_by_id(@user_id, 120) %></div> 
+    <div class="profile-info">
+      <p id="name"><%= @user.first_name + " " + @user.last_name %></p>
+      <p><%= @user.state %>, USA</p>
+	  <p><%= pluralize(number_with_delimiter(@total_workouts),"workout") %> completed</p>
+      <p>Joined: <%= @user.created_at.strftime('%b %d, %Y') %></p>
+    </div>
+    <% if @user_id == current_user.id %>
+      <a href="/profile/settings/" data-turbolinks="false" title="Edit your profile settings" id="settings-icon"><i class="fa fa-cog" aria-hidden="true"></i></a>
+    <% else %>
+	  <div id="friend-wrapper">
+	    <% if @friendHash[current_user.id] %>
+	      <% if @friendHash[current_user.id][:status] == 'accepted' %>
+	        <div class="friend-options">
+		      <a class="friend-btn"><i class="fa fa-check" aria-hidden="true"></i> Friends</a>
+			  <div class="dropdown">
+			    <div class="arrow-up"></div>
+		        <div class="dropdown-content">
+			      <%= link_to raw('<div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>Send message'), "/messages/#{@user.id}", remote: true %>
+		          <%= link_to raw('<div class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></div>Remove friend'), "/friends/#{@friendHash[current_user.id][:id]}?profile=true", remote: true, method: 'delete', data: { confirm: "Are you sure you want to remove this friend?" } %>
+		      </div>
+			</div>
+		  </div>
+		  <% elsif @friendHash[current_user.id][:status] == 'pending' %>
+		    <a id="request-pending">Friend request pending...</a>
+		  <% elsif @friendHash[current_user.id][:status] == 'requested' %>
+		    <a href="/friends" id="request-pending">Friend request pending...</a>
+		  <% end %>
+		<% else %>
+	      <%= link_to raw('<i class="fa fa-user-plus" aria-hidden="true"></i> Add friend'), "/friends/#{@user_id}", remote: true, method: 'post', title:'Request to add this user as a friend', id: 'add-friend-btn' %>
+	      <div id="friend-message-display"></div>
+		<% end %>
+      </div>
+	<% end %>
+  </div>
+
+<h4 class="profile-subheader">Results</h4>
+
+<div id="profile-chart-header">
+ <div class="unit">
+  <button id="minutes-btn">Minutes</button>
+  <button id="points-btn">Points</button>
+ </div>
+ <div class="timespan">
+  <button id="this-week-btn" class="time-btn">Past Week</button>
+  <button id="past-30-btn" class="time-btn">30 Days</button>
+  <button id="past-60-btn" class="time-btn">60 Days</button>
+  <button id="all-btn" class="time-btn">Lifetime</button>
+ </div>
+</div>
+<div id="profile-chart"></div>
+
+<h4 class="profile-subheader" style="margin-top: 50px;">Fitness Friends</h4>
+<div id="profile-friends-container">
+  <% @friends.each do |friend| %>
+    <div class="friend-wrapper">
+	  <div class="friend-image"><%= user_image_by_id(friend.friend_id, 40) %></div>
+	  <div class="friend-info">
+	    <a class="name" href="/profile?user=<%= friend.friend_id %>" data-turbolinks="false"><%= friend.first_name %> <%= friend.last_name %></a>
+		<p><%= friend.state %></p>
+		<p><%= pluralize(friend.workouts,"workout") %> completed</p>
+	  </div>
+	</div>
+  <% end %>
+</div>
+<div id="friend-count-wrapper"><a href="/friends?user=<%= @user_id %>" id="friend-count">(<%= pluralize(@total_friends,"total friend") %>)</a></div>
+
+<h4 class="profile-subheader" style="margin-top: 50px;">Achievements</h4>
+
+<% else %>
+  <h2>Oops! That's not a valid user.</h2>
+<% end %>
+<% else %>
+  <h2>Oops! You must be logged in to view this page.</h2>
+  <p><%= link_to "Log in", '/login' %></p>
+<% end %>

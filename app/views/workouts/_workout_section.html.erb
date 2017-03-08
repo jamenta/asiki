@@ -1,0 +1,8 @@
+<div class="workout-wrapper">
+  <p class="workout-length"><%= i %>-Minute Workout</p>
+  <p class="workout-description"><%= @workouts[i][:short_description] %></p>
+  <div class="image-wrapper">
+    <div class="workout-image" style="background-image:url(<%= @workouts[i][:image_url] %>)"></div>
+  </div>
+  <a href="<%= '/current/' + i.to_s %>"class="view-workout-btn">View Workout</a>
+</div>

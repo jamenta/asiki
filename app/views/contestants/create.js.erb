@@ -1,0 +1,21 @@
+<% if @invite_success == true %>
+  var message =  '<p id="invite-message" class="good-message">' + '<%= j @resulting_message %>' + '</p>'
+  $('#outstanding-invites').prepend("<%= j render("invite_display") %>");
+  $('#message-display').children('p').remove();
+  $('#message-display').append(message);
+  setTimeout(function() {
+    $("p#invite-message").fadeOut("slow");
+    }, 2500);
+<% else %>
+  var message =  '<p id="invite-message" class="bad-message">' + '<%= j @resulting_message %>' + '</p>'
+  $('#message-display').children('p').remove();
+  $('#message-display').append(message);
+  setTimeout(function() {
+    $("p#invite-message").fadeOut("slow");
+    }, 2500);
+<% end %>
+
+$('#contestant_email').val("");
+
+
+

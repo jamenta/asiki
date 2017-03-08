@@ -1,0 +1,38 @@
+		<% if unread_notifications == 0 %>
+		  <a id="notification-button" class="notification-btn" title="No new notifications"><%= unread_notifications %></a>
+		<% else %>
+		  <a id="notification-button" class="notification-btn-unread" title="<%= pluralize(unread_notifications, 'new notification') %>"><%= unread_notifications %></a>
+	     <% end %>
+			
+		    <% if notifications[0] == nil %>
+              <div class="notification-menu">
+	         <p style="color: #4C4C4C; font-size: 11px; font-weight: bold; background-color:#D9D9D9; padding: 8px 5px 8px 5px; text-align: left;">NO NOTIFICATIONS TO SHOW</p>
+		    <% else %>
+              <div class="notification-menu" style="width:300px; overflow-y:scroll;">
+	         <p style="color: #4C4C4C; font-size: 11px; font-weight: bold; background-color:#D9D9D9; padding: 8px 5px 8px 5px; text-align: left;">NOTIFICATIONS</p>
+		      <% notifications.each do |n| %>
+			  <% if n.read == true %>
+	              <div class="read-notification">
+                    <% if n.link_url.include? "/profile" %>
+                      <a class="notification-link" href="<%= n.link_url %>" data-turbolinks="false">
+                    <% else %>
+	                 <a class="notification-link" href="<%= n.link_url %>">
+                    <% end %>
+ 			  <% else %>
+		        <div class="unread-notification">
+	               <a class="unread-notification-link" data-method="patch" href="/notifications/<%= n.id %>">
+	             <% end %>
+                      <div class="notification-header">
+                       <%= image_tag "favicon.jpg", size: "14x14", style: "padding: 2px 0 0 2px;" %>
+				  <p class="note-type" style="padding-top: 5px;"><%= n.notification_type.upcase %></p>
+                       <p class="note-timestamp" style="padding-top: 3px;"><%= time_ago_in_words(n.created_at) %> ago</p>
+                      </div>
+				
+	               <p class="read-icon"><i class="fa fa-circle" aria-hidden="true"></i></p> 
+                     <p class="note-desc"><%= n.description %></p>
+                     </a>
+		        </div>
+	   	      <% end %>
+		    <% end %>
+			  
+		  </div>

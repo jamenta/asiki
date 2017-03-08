@@ -1,0 +1,8 @@
+<div class="invited">
+  <% if @invite_display[:user_id] == nil %>
+    <div class="emoji-invited"><%= emojify ":sleuth_or_spy::skin-tone-2:", img_attrs: { title: nil} %> </div>
+  <% else %>
+    <div class="emoji-invited"><%= user_image_by_id(@invite_display[:user_id],18) %></div>
+  <% end %>
+  <p style=<%= @invite_display[:style] %> title="<%= @invite_display[:email] %>"><%= @invite_display[:name] %></p>
+</div>

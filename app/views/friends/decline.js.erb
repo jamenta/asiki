@@ -1,0 +1,6 @@
+<% if @success_bool %>
+  $('div#user_<%= @friend1.friend_id %>').remove();
+<% else %>
+  alert("Friend could not be removed at this time. Please try again later.");
+<% end %>
+  

@@ -1,0 +1,97 @@
+<% if current_user %>
+
+<div class="qf-header">
+<h1>Workout Result for <%= @user.first_name %> <%= @user.last_name %></h1>
+</div>
+
+<div class="results-workout-section">
+<p style="font-size: 24px; margin: 30px 0 30px 0;"><%= @workout.short_description %></p>
+<p id="extra-details-link">Additional details <i class="fa fa-plus-circle" aria-hidden="true" style="padding-left: 4px"></i></p>
+<div id="extra-details">
+  <p style="font-size: 12px;">Completed on: <%= @post.created_at.strftime('%m-%d-%Y')%></p>
+  <p style="font-size: 12px;">Duration: <%= @workout.workout_length%> <%= "minute".pluralize(@workout.workout_length) %> </p>
+  <p style="font-size: 12px;">Total points: <%= @pointTotal %></p>
+</div>
+</div>
+
+<div id="results-display-section">
+  <% if current_user.id.to_i == @user.id.to_i %>
+    <div id="result-options">
+      <p id="option-buttons">
+      <a id="edit" title="Edit results" data-remote="true" href="/results/post/<%= @post.id %>/user/<%= current_user.id %>/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+	  <a id="delete" title="Delete results" rel="nofollow" data-method="delete" data-confirm="Are you sure you want to delete your results?" href="/results/post/<%= @post.id %>/user/<%= current_user.id %>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+      </p>
+     </div>
+  <p class="header" style="font-size: 20px">Results</p>
+  <% else %>
+  <p class="header" style="padding-top: 20px; font-size: 20px;">Results</p>
+  <% end %>
+  <div id= "individual-results">
+    <% if @workout.rounds == true %>
+      <% @results.each do |result| %>
+        <% if result.exercise_description == "Total rounds" %>
+          <p>Total rounds: <%= result.reps %></p>
+        <% end %>
+      <% end %>
+      <% @results.each do |result| %>
+        <% if result.exercise_description != "Total rounds" %>
+          <p><%= result.exercise_description %> (extra reps): <%= result.reps %></p>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% @results.each do |result| %>
+        <p><%= result.exercise_description %> reps: <%= result.reps %></p>
+      <% end %>
+    <% end %>
+    <% if @comment != nil && @comment != "" %>
+      <p id="results-comment"><%= @comment %></p>
+    <% end %>
+  </div>
+</div>
+  
+  <div id="bottom-results-links">
+    <% if @back_to == "all" %>
+      <a href="/results/all" class="view-results-btn" %>More results for <%= @user.first_name %></a>
+    <% elsif @back_to == "index" %>
+      <a href="/results?user=<%= @user.id %>&start_date=<%= @start_date %>&end_date=<%= @end_date %>" class="view-results-btn" %>More results for <%= @user.first_name %></a>
+    <% else %>
+      <a href="/results/current/<%= @user.id %>" class="view-results-btn" %>More results for <%= @user.first_name %></a>
+    <% end %>
+	<div id="favorite-stuff">
+	  <% if @favHash[current_user.id] != nil %>
+        <%= link_to(raw(emojify ":heart:", img_attrs: { title: "You liked this workout result" }, class_name: "emoji-favorite favorited"), "/favorites/#{@favHash[current_user.id][:fav_id]}?back_to=#{@back_to}&total=#{@favorites.length}", id: 'favorite-result', remote: true, method: 'delete') %>
+	  <% else %>
+	    <%= link_to(raw(emojify ":heart:", img_attrs: { title: "Like this workout result" }, class_name: "emoji-favorite"), "/favorites/#{@post.id}?back_to=#{@back_to}&total=#{@favorites.length}", id: 'favorite-result', remote: true, method: 'post') %>
+      <% end %>
+	  <div id="hover-wrapper">
+	    <% if @favorites.length > 0 %>
+	      <div id="favorite-count"><p><%= @favorites.length %></p></div>
+	      <div id="hidden-favorites">
+	        <div class="arrow-up"></div>
+	        <div id="favorite-users-wrapper">
+			  <% if @favorites.length > 15 %>
+	            <% @favorites[0,15].each do |fav| %>
+	              <a data-turbolinks="false" href="/profile?user=<%= fav.user_id %>" class="favorite-user" id="fav-user-<%= fav.user_id %>"><%= fav.first_name + ' ' + fav.last_name[0,1] + '.' %></a>
+		        <% end %>
+				<a class="favorite-user">+ <%= pluralize(@favorites.length - 15, "other") %></a>
+			  <% else %>
+	            <% @favorites.each do |fav| %>
+	              <a data-turbolinks="false" href="/profile?user=<%= fav.user_id %>" class="favorite-user" id="fav-user-<%= fav.user_id %>"><%= fav.first_name + ' ' + fav.last_name[0,1] + '.' %></a>
+		        <% end %>
+			  <% end %>
+		    </div>
+	      </div>
+		<% else %>
+		  <div id="favorite-count"></div>
+		<% end %>
+	  </div>
+	</div>
+  </div>
+
+<% else %>
+
+<h2>Oops! You are not authorized to view this page.</h2>
+<a href="/workouts" %>View workouts</a>
+
+<% end %>
+

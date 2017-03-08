@@ -1,0 +1,9 @@
+<div class="invited">
+  <% if @user_exists %>
+    <div class="emoji-invited"><%= user_image_by_id(@user.id, 20) %></div>
+    <p><%= @user.first_name + ' ' + @user.last_name %></p>
+  <% else %>
+    <div class="emoji-invited"><%= emojify ":sleuth_or_spy::skin-tone-2:", img_attrs: { title: nil} %> </div>
+    <p><%= @email %></p>
+  <% end %>
+</div>
