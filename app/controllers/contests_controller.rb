@@ -53,7 +53,7 @@ def show
 					JOIN users on contestants.user_id = users.id").where(contest_id: @contest.id).select(:first_name, 
 					:last_name, :user_id, :accepted, :id).map{|i|[i.user_id, i]}]
    @thisContestant = @contestantHash[current_user.id]
-   @comments = ContestComment.joins("JOIN users ON contest_comments.user_id = users.id").where(contest_id: @contest.id).select(:comment, :first_name, :last_name, :created_at, :user_id, :contest_id).order(created_at: :desc)
+   @comments = ContestComment.joins("JOIN users ON contest_comments.user_id = users.id").where(contest_id: @contest.id).select(:id, :comment, :first_name, :last_name, :created_at, :user_id, :contest_id).order(created_at: :desc)
    @outstanding_users = Contestant.joins("JOIN contests ON contests.id = contestants.contest_id JOIN users on contestants.user_id = users.id").where(accepted: nil,
      contest_id: @contest.id).select(:first_name, :last_name, :user_id)
    @leaderboards = ActiveRecord::Base.connection.execute(contest_leaderboard_sql)
