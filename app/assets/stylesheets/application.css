@@ -28,7 +28,11 @@ body {
   min-height: 100%;
 }
 
+<<<<<<< HEAD
 html {height: 100%;}
+=======
+html {height: 100%}
+>>>>>>> bffee125e90c53cd754c1a4e676b4d5a4a89a0a0
 
 a, a:visited {
   color: #FFFFFF;
