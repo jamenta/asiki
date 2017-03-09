@@ -28,6 +28,8 @@ body {
   height: 100%;
 }
 
+html {height: 100%}
+
 a, a:visited {
   color: #FFFFFF;
 }
