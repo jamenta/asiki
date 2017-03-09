@@ -1,41 +1,28 @@
 <% if @contest == nil %>
-
   <h1 style="padding-top: 10px;">Oops! This contest does not exist or has been removed.</h1>
-
 <% else %>
   <% if @thisContestant %>
-   <% if @thisContestant[:accepted] == nil %>
-    <div class="accept-invite">
-      <p>You've been invited to join <%= @contest.contest_name %>!</p>
-      <%= form_for(@thisContestant, class: "accept-btn", :method => :patch, url: url_for(controller: 'contestants', action: 'update', value: true, contestant_id: @thisContestant.id)) do |f| %>
-	  <%= f.submit "Accept", id:"accept" %>
-      <% end %>
-
-      <%= form_for(@thisContestant, class: "decline-btn", :method => :patch, url: url_for(controller: 'contestants', action: 'update', value: false, contestant_id: @thisContestant.id)) do |f| %>
-	  <%= f.submit "Decline", id:"decline" %>
-      <% end %>
-    </div>
-
-      
-  <% elsif @thisContestant[:accepted] == true %>
-
-    <%= render "accepted" %>  
-
+	<% if @thisContestant[:accepted] == nil %>
+		<div class="accept-invite">
+		  <p>You've been invited to join <%= @contest.contest_name %>!</p>
+		  <%= form_for(@thisContestant, class: "accept-btn", :method => :patch, url: url_for(controller: 'contestants', action: 'update', value: true, contestant_id: @thisContestant.id)) do |f| %>
+		    <%= f.submit "Accept", id:"accept" %>
+		  <% end %>
+		  <%= form_for(@thisContestant, class: "decline-btn", :method => :patch, url: url_for(controller: 'contestants', action: 'update', value: false, contestant_id: @thisContestant.id)) do |f| %>
+		    <%= f.submit "Decline", id:"decline" %>
+		  <% end %>
+		</div>
+	<% elsif @thisContestant[:accepted] == true %>
+		<%= render "accepted" %>  
+    <% else %>
+	   <div class="rejoin-contest">
+		 <p>You declined joining this contest. Did you change your mind?</p>
+		 <%= form_for(@thisContestant, class: "join-btn", :method => :patch, url: url_for(controller: 'contestants', action: 'update', value: true, contestant_id: @thisContestant.id)) do |f| %>
+		 <%= f.submit "Join", id:"join" %>
+		 <% end %>
+	   </div>
+	<% end %>
   <% else %>
-   <div class="rejoin-contest">
-     <p>You declined joining this contest. Did you change your mind?</p>
-     <%= form_for(@thisContestant, class: "join-btn", :method => :patch, url: url_for(controller: 'contestants', action: 'update', value: true, contestant_id: @thisContestant.id)) do |f| %>
-	 <%= f.submit "Join", id:"join" %>
-     <% end %>
-   </div>
-
-  <% end %>
-
-  <% else %>
-
     <h1 style="padding-top: 10px;">Oops! You're not authorized to view this page.</h1>
-
   <% end %>
-
-
 <% end %>

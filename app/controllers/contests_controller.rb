@@ -49,7 +49,9 @@ def show
   if @contest != nil
    @contestants = Contestant.joins("JOIN contests ON contests.id = contestants.contest_id JOIN users on contestants.user_id = users.id").where(accepted: true,
 			      contest_id: @contest.id).select(:first_name, :last_name, :user_id, :accepted)
-   @contestantHash = Hash[@contestants.map{|i|[i.user_id, i]}]
+   @contestantHash = Hash[Contestant.joins("JOIN contests ON contests.id = contestants.contest_id 
+					JOIN users on contestants.user_id = users.id").where(contest_id: @contest.id).select(:first_name, 
+					:last_name, :user_id, :accepted, :id).map{|i|[i.user_id, i]}]
    @thisContestant = @contestantHash[current_user.id]
    @comments = ContestComment.joins("JOIN contests ON contests.id = contest_comments.id JOIN users ON contest_comments.user_id = users.id").where(
      contest_id: @contest.id).select(:comment, :first_name, :last_name, :created_at, :user_id, :contest_id).order(created_at: :desc)
