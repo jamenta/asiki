@@ -74,8 +74,11 @@ class ResultsController < ApplicationController
 	      @start = 0
 	    end
 	    @workouts = Result.joins("JOIN posts ON results.post_id = posts.id JOIN workouts 
-		ON results.workout_id = workouts.id JOIN exercises ON exercises.id = results.exercise_id").where(user_id: @user.id).select("SUM(points * reps) as total_points, 
-		posts.created_at AS create_date, short_description, workout_length, results.post_id as post_id, results.user_id").group("create_date, short_description, workout_length, results.post_id, results.user_id").order("posts.created_at DESC").limit(@items_per_page).offset(@start)
+		ON results.workout_id = workouts.id JOIN exercises ON exercises.id = 
+		results.exercise_id").where(user_id: @user.id).select("SUM(points * reps) as total_points, 
+		posts.created_at AS create_date, short_description, workout_length, 
+		results.post_id as post_id, results.user_id").group("create_date, short_description, 
+		workout_length, results.post_id, results.user_id").order("posts.created_at DESC").limit(@items_per_page).offset(@start)
 		
   	    @count = Post.where(user_id: @user.id).count
 	    @total_pages = (@count/@items_per_page.to_f).ceil
@@ -98,11 +101,12 @@ class ResultsController < ApplicationController
 		@user = User.find_by_id(params[:user_id])
 	    if @user
 			@today = Date.today
-			@workouts = Result.joins("JOIN exercises ON results.exercise_id = exercises.id JOIN workouts 
-			ON results.workout_id = workouts.id").where("results.user_id = #{@user.id} AND workouts.start_date <= '#{@today}' AND workouts.end_date >= '#{@today}'").select("SUM(points * reps) as total_points, 
-			Date(results.created_at) AS create_date, 
-			short_description, workout_length, post_id, user_id").group(:short_description, :workout_length, 
-			:post_id, :created_at, :user_id).order(created_at: :desc)
+			@workouts = Result.joins("JOIN posts ON results.post_id = posts.id JOIN workouts 
+			ON results.workout_id = workouts.id JOIN exercises ON exercises.id = results.exercise_id").where("posts.user_id = #{@user.id} AND 
+			workouts.start_date <= '#{@today}' AND workouts.end_date >= '#{@today}'").select("SUM(points * reps) as total_points, 
+			posts.created_at AS create_date, short_description, workout_length, results.post_id as post_id, 
+			results.user_id").group("create_date, short_description, workout_length, results.post_id, 
+			results.user_id").order("posts.created_at DESC").limit(@items_per_page).offset(@start)
 			@back_to = "current"
 	    end
 	end
@@ -121,6 +125,7 @@ class ResultsController < ApplicationController
          end
 	    @results = Result.joins("JOIN exercises ON results.exercise_id = exercises.id").where(post_id: @post.id, user_id: @user.id).select(:exercise_description,
 		:points, :reps, :id)
+		
 	    @comment = @post.comment
 	    @pointTotal = 0
 	    @results.each do |r|
