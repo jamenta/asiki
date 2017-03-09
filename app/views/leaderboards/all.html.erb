@@ -70,19 +70,36 @@
 </div>
 
 <div id="performance-container">
-  <% @workouts_array.each do |w| %>
-    <div class="top-individual">
-      <h3>Best <%= w %>-Minute Workout</h3>
-        <% if @top_performers[w] %>
-          <p class="top-p" style="padding-top: 10px;"><%= user_image_by_id(@top_performers[w]["user_id"], 40) %> <a class="name" data-turbolinks="false" href="/profile?user=<%= @top_performers[w]["user_id"] %>"><%= @top_performers[w]["first_name"] + " " + @top_performers[w]["last_name"][0,1].upcase + "." %></a></p> 
-          <p class="top-p" style="font-size: 40px; padding: 10px 0 10px 0;"><%= number_with_delimiter(@top_performers[w]["total_points"]) %> points</p>
-          <p class="top-p">Completed on: <%= @top_performers[w]["created_at"].to_date.strftime("%m/%d/%y") %></p>
-          <p class="top-p"><a class="view-result" href='/results/post/<%= @top_performers[w]["post_id"].to_s %>/user/<%= @top_performers[w]["user_id"].to_s %>?back_to=current'>View Result</a></p>
-        <% else %>
-          <p style="padding-top: 10px;">No one has completed a <a class="workout-link" href="<%= '/current/' + w.to_s %>"><%= w %>-minute workout</a>...yet.</p>
-        <% end %> 
-    </div>
-  <% end %>
+  <div class="performer-pair">
+	  <% @workouts_array[0,2].each do |w| %>
+		<div class="top-individual">
+		  <h3>Best <%= w %>-Minute Workout</h3>
+			<% if @top_performers[w] %>
+			  <p class="top-p" style="padding-top: 10px;"><%= user_image_by_id(@top_performers[w]["user_id"], 40) %> <a class="name" data-turbolinks="false" href="/profile?user=<%= @top_performers[w]["user_id"] %>"><%= @top_performers[w]["first_name"] + " " + @top_performers[w]["last_name"][0,1].upcase + "." %></a></p> 
+			  <p class="top-p" style="font-size: 40px; padding: 10px 0 10px 0;"><%= number_with_delimiter(@top_performers[w]["total_points"]) %> points</p>
+			  <p class="top-p">Completed on: <%= @top_performers[w]["created_at"].to_date.strftime("%m/%d/%y") %></p>
+			  <p class="top-p"><a class="view-result" href='/results/post/<%= @top_performers[w]["post_id"].to_s %>/user/<%= @top_performers[w]["user_id"].to_s %>?back_to=current'>View Result</a></p>
+			<% else %>
+			  <p style="padding-top: 10px;">No one has completed a <a class="workout-link" href="<%= '/current/' + w.to_s %>"><%= w %>-minute workout</a>...yet.</p>
+			<% end %> 
+		</div>
+	  <% end %>
+  </div>
+  <div class="performer-pair">
+	  <% @workouts_array[2,4].each do |w| %>
+		<div class="top-individual">
+		  <h3>Best <%= w %>-Minute Workout</h3>
+			<% if @top_performers[w] %>
+			  <p class="top-p" style="padding-top: 10px;"><%= user_image_by_id(@top_performers[w]["user_id"], 40) %> <a class="name" data-turbolinks="false" href="/profile?user=<%= @top_performers[w]["user_id"] %>"><%= @top_performers[w]["first_name"] + " " + @top_performers[w]["last_name"][0,1].upcase + "." %></a></p> 
+			  <p class="top-p" style="font-size: 40px; padding: 10px 0 10px 0;"><%= number_with_delimiter(@top_performers[w]["total_points"]) %> points</p>
+			  <p class="top-p">Completed on: <%= @top_performers[w]["created_at"].to_date.strftime("%m/%d/%y") %></p>
+			  <p class="top-p"><a class="view-result" href='/results/post/<%= @top_performers[w]["post_id"].to_s %>/user/<%= @top_performers[w]["user_id"].to_s %>?back_to=current'>View Result</a></p>
+			<% else %>
+			  <p style="padding-top: 10px;">No one has completed a <a class="workout-link" href="<%= '/current/' + w.to_s %>"><%= w %>-minute workout</a>...yet.</p>
+			<% end %> 
+		</div>
+	  <% end %>
+  </div>
 </div>
 
 

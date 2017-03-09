@@ -65,7 +65,7 @@ p.timestamp {
 }
 
 #add-comment-btn{
- height: 32px;
+ height: 33px;
  width: 42px;
  color: #FFFFFF;
  background-color: rgb(19, 58, 117);
@@ -101,4 +101,9 @@ div#contest-comment-warnings p {
   color: red;
   font-size: 12px;
   vertical-align: top;
+}
+
+textarea#add_comment_field {
+width: 470px;
+height: 34px;
 }

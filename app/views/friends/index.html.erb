@@ -39,7 +39,7 @@
 				<div class="dropdown">
 				  <div class="arrow-up"></div>
 				  <div class="dropdown-content">
-					<%= link_to raw('<div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>Send message'), "/messages/#{@user.id}", remote: true %>
+					<%= link_to raw('<div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>Send message'), "/messages/#{friend.friend_id}", remote: true %>
 					<%= link_to raw('<div class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></div>Remove friend'), "/friends/#{friend.id}", remote: true, method: 'delete', data: { confirm: "Are you sure you want to remove this friend?" } %>
 				  </div>
 				</div>
@@ -53,7 +53,7 @@
 						<div class="dropdown">
 						  <div class="arrow-up"></div>
 						  <div class="dropdown-content">
-							<%= link_to raw('<div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>Send message'), "/messages/#{@user.id}", remote: true %>
+							<%= link_to raw('<div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>Send message'), "/messages/#{friend.friend_id}", remote: true %>
 							<%= link_to raw('<div class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></div>Remove friend'), "/friends/#{friend.id}", remote: true, method: 'delete', data: { confirm: "Are you sure you want to remove this friend?" } %>
 						  </div>
 						</div>

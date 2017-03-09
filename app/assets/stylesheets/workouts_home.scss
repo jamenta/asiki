@@ -110,11 +110,10 @@ margin-bottom: 20px;
 }
 
 .post-results-btn {
-  display: inline-block;
+  display: block;
   cursor: pointer;
   background-color: rgb(117, 161, 164);
   color: white;
-  display: inline-block;
   border: 2px solid white;
   color: #FFFFFF;
   text-align: center;
@@ -123,10 +122,7 @@ margin-bottom: 20px;
   width: 250px;
   height: 20px;
   transition: all 0.4s;
-  margin: 0 auto;
-  margin-right: 20%;
-  margin-left: 20%;
-  margin-bottom: 20px;
+  margin: auto;
   margin-top: 20px;
   border-radius: 5px;
 }

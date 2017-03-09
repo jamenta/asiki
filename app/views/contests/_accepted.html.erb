@@ -54,7 +54,7 @@
           <h2> <%= emojify ":mega:", img_attrs: { title: nil}, class_name: "emoji-header" %> Contest Chatter <%= emojify ":mega:", img_attrs: { title: nil}, class_name: "emoji-header" %> </h2>
             <div class="add-comment-section">
               <%= form_for(ContestComment.new, remote: true, :method => :post, url: "/contests/#{@contest.id}/comments") do |f| %>
-               <%= f.text_area :comment, size: '66x2', id: "add_comment_field", placeholder: "Add a comment..." %>
+               <%= f.text_area :comment, id: "add_comment_field", placeholder: "Add a comment..." %>
                <%= f.submit "Add", id: "add-comment-btn" %>
               <% end %>
             </div>
